@@ -45,7 +45,7 @@ export default function CanteenManagementLanding() {
     }
 
     window.addEventListener("scroll", handleScroll)
-    handleScroll() // Call once to set initial state
+    handleScroll()
 
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -59,12 +59,12 @@ export default function CanteenManagementLanding() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-2 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-2 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:rotate-3">
                 <Utensils className="h-6 w-6 text-white" />
               </div>
               <span className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
@@ -72,7 +72,6 @@ export default function CanteenManagementLanding() {
               </span>
             </div>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="#hero" className={getLinkStyles("hero")}>
                 Canteen Management System
@@ -88,17 +87,18 @@ export default function CanteenManagementLanding() {
               </a>
             </div>
 
-            {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700 hover:text-blue-600 hover:bg-blue-50">
+              <Button
+                variant="ghost"
+                className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-300"
+              >
                 Sign In
               </Button>
-              <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5">
                 Get Started
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -107,9 +107,8 @@ export default function CanteenManagementLanding() {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-200/50">
+            <div className="md:hidden py-4 border-t border-gray-200/50 animate-in slide-in-from-top duration-300">
               <div className="flex flex-col space-y-4">
                 <a href="#hero" className={`${getLinkStyles("hero")} py-2`}>
                   Canteen Management System
@@ -153,8 +152,8 @@ export default function CanteenManagementLanding() {
 
         <div className="text-center space-y-10 relative z-10 flex flex-col justify-center min-h-[70vh]">
           <div className="flex justify-center items-center space-x-4 mb-8 group">
-            <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105 border border-white/30">
-              <Utensils className="h-10 w-10 text-white" />
+            <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-6 border border-white/30">
+              <Utensils className="h-10 w-10 text-white animate-pulse" />
             </div>
             <h1 className="text-5xl font-bold text-white drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
               Canteen Management System
@@ -164,24 +163,24 @@ export default function CanteenManagementLanding() {
           <div className="relative">
             <h2 className="text-3xl md:text-4xl font-bold text-white max-w-5xl mx-auto leading-tight drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
               Smart Canteen Management System:
-              <span className="relative inline-block mx-2">
-                <span className="text-blue-200">Serve Smart</span>
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full opacity-80"></div>
+              <span className="relative inline-block mx-2 group">
+                <span className="text-blue-200 group-hover:text-blue-100 transition-colors">Serve Smart</span>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse"></div>
               </span>
               ,
-              <span className="relative inline-block mx-2">
-                <span className="text-emerald-200">Waste Less</span>
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full opacity-80"></div>
+              <span className="relative inline-block mx-2 group">
+                <span className="text-emerald-200 group-hover:text-emerald-100 transition-colors">Waste Less</span>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-100"></div>
               </span>
               ,
-              <span className="relative inline-block mx-2">
-                <span className="text-purple-200">Organize Better</span>
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full opacity-80"></div>
+              <span className="relative inline-block mx-2 group">
+                <span className="text-purple-200 group-hover:text-purple-100 transition-colors">Organize Better</span>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-200"></div>
               </span>
               and
-              <span className="relative inline-block mx-2">
-                <span className="text-amber-200">Profit More</span>
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-80"></div>
+              <span className="relative inline-block mx-2 group">
+                <span className="text-amber-200 group-hover:text-amber-100 transition-colors">Profit More</span>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-300"></div>
               </span>
             </h2>
           </div>
@@ -194,19 +193,19 @@ export default function CanteenManagementLanding() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button
               size="lg"
-              className="bg-white/95 text-blue-600 hover:bg-white px-10 py-4 text-lg rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 group backdrop-blur-sm"
+              className="bg-white/95 text-blue-600 hover:bg-white px-10 py-4 text-lg rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm"
             >
-              <Play className="mr-3 h-6 w-6 group-hover:animate-pulse" />
+              <Play className="mr-3 h-6 w-6 group-hover:animate-spin" />
               Get Started Free
-              <Sparkles className="ml-2 h-5 w-5" />
+              <Sparkles className="ml-2 h-5 w-5 group-hover:animate-pulse" />
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 group bg-transparent shadow-2xl"
+              className="px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-500 group bg-transparent shadow-2xl hover:scale-110 hover:-translate-y-1"
             >
               <span className="group-hover:text-blue-100 transition-colors">Watch Demo</span>
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
             </Button>
           </div>
         </div>
@@ -223,82 +222,95 @@ export default function CanteenManagementLanding() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-8 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-105">
-                <div className="text-5xl font-bold mb-2">2,500+</div>
-                <div className="text-blue-100 text-lg">Active Canteens</div>
+            {[
+              {
+                number: "2,500+",
+                label: "Active Canteens",
+                gradient: "from-blue-500 to-indigo-600",
+                glow: "shadow-blue-500/50",
+              },
+              {
+                number: "40%",
+                label: "Average Waste Reduction",
+                gradient: "from-emerald-500 to-green-600",
+                glow: "shadow-emerald-500/50",
+              },
+              {
+                number: "25%",
+                label: "Profit Increase",
+                gradient: "from-purple-500 to-violet-600",
+                glow: "shadow-purple-500/50",
+              },
+            ].map((stat, index) => (
+              <div key={index} className="text-center group cursor-pointer">
+                <div
+                  className={`bg-gradient-to-br ${stat.gradient} text-white p-8 rounded-2xl shadow-lg group-hover:shadow-2xl ${stat.glow} group-hover:${stat.glow} transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2`}
+                >
+                  <div className="text-5xl font-bold mb-2 group-hover:animate-pulse">{stat.number}</div>
+                  <div className="text-blue-100 text-lg">{stat.label}</div>
+                </div>
               </div>
-            </div>
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-emerald-500 to-green-600 text-white p-8 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-105">
-                <div className="text-5xl font-bold mb-2">40%</div>
-                <div className="text-green-100 text-lg">Average Waste Reduction</div>
-              </div>
-            </div>
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-purple-500 to-violet-600 text-white p-8 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-105">
-                <div className="text-5xl font-bold mb-2">25%</div>
-                <div className="text-purple-100 text-lg">Profit Increase</div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-green-50">
-              <CardHeader>
-                <div className="bg-gradient-to-br from-green-400 to-emerald-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <TrendingUp className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl">Boost Revenue</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Smart pricing and discount strategies increase your daily profits by up to 25%
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-blue-50">
-              <CardHeader>
-                <div className="bg-gradient-to-br from-blue-400 to-indigo-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <BarChart3 className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl">Reduce Waste</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  AI-powered demand prediction helps you prepare the right quantities, cutting waste by 40%
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-purple-50">
-              <CardHeader>
-                <div className="bg-gradient-to-br from-purple-400 to-violet-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Clock className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl">Save Time</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Automated billing and inventory management saves 3+ hours daily for your staff
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-orange-50">
-              <CardHeader>
-                <div className="bg-gradient-to-br from-orange-400 to-amber-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl">Happy Customers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Faster service and consistent quality lead to 95% customer satisfaction rates
-                </p>
-              </CardContent>
-            </Card>
+            {[
+              {
+                icon: TrendingUp,
+                title: "Boost Revenue",
+                desc: "Smart pricing and discount strategies increase your daily profits by up to 25%",
+                gradient: "from-green-400 to-emerald-500",
+                glow: "shadow-green-500/30",
+                bgGradient: "from-white to-green-50",
+                hoverGlow: "hover:shadow-green-500/40",
+              },
+              {
+                icon: BarChart3,
+                title: "Reduce Waste",
+                desc: "AI-powered demand prediction helps you prepare the right quantities, cutting waste by 40%",
+                gradient: "from-blue-400 to-indigo-500",
+                glow: "shadow-blue-500/30",
+                bgGradient: "from-white to-blue-50",
+                hoverGlow: "hover:shadow-blue-500/40",
+              },
+              {
+                icon: Clock,
+                title: "Save Time",
+                desc: "Automated billing and inventory management saves 3+ hours daily for your staff",
+                gradient: "from-purple-400 to-violet-500",
+                glow: "shadow-purple-500/30",
+                bgGradient: "from-white to-purple-50",
+                hoverGlow: "hover:shadow-purple-500/40",
+              },
+              {
+                icon: Users,
+                title: "Happy Customers",
+                desc: "Faster service and consistent quality lead to 95% customer satisfaction rates",
+                gradient: "from-orange-400 to-amber-500",
+                glow: "shadow-orange-500/30",
+                bgGradient: "from-white to-orange-50",
+                hoverGlow: "hover:shadow-orange-500/40",
+              },
+            ].map((benefit, index) => (
+              <Card
+                key={index}
+                className={`text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br ${benefit.bgGradient} group ${benefit.hoverGlow}`}
+              >
+                <CardHeader>
+                  <div
+                    className={`bg-gradient-to-br ${benefit.gradient} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg ${benefit.glow} group-hover:shadow-xl group-hover:${benefit.glow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}
+                  >
+                    <benefit.icon className="h-8 w-8 text-white group-hover:animate-bounce" />
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-green-600 transition-colors">
+                    {benefit.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">{benefit.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -314,101 +326,75 @@ export default function CanteenManagementLanding() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm group">
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl">
-                  <div className="bg-gradient-to-br from-green-400 to-emerald-500 p-2 rounded-lg mr-3 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="h-6 w-6 text-white" />
-                  </div>
-                  Smart Billing System
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Generate bills instantly with barcode scanning, split payments, and digital receipts
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm group">
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl">
-                  <div className="bg-gradient-to-br from-blue-400 to-indigo-500 p-2 rounded-lg mr-3 group-hover:scale-110 transition-transform">
-                    <Zap className="h-6 w-6 text-white" />
-                  </div>
-                  AI Demand Prediction
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Predict food quantities needed based on historical data, weather, and events
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm group">
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl">
-                  <div className="bg-gradient-to-br from-purple-400 to-violet-500 p-2 rounded-lg mr-3 group-hover:scale-110 transition-transform">
-                    <Target className="h-6 w-6 text-white" />
-                  </div>
-                  Dynamic Pricing
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Optimize discounts and pricing strategies to maximize profit and reduce waste
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm group">
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl">
-                  <div className="bg-gradient-to-br from-orange-400 to-amber-500 p-2 rounded-lg mr-3 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="h-6 w-6 text-white" />
-                  </div>
-                  Inventory Management
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Track ingredients, monitor stock levels, and automate reorder notifications
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm group">
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl">
-                  <div className="bg-gradient-to-br from-red-400 to-pink-500 p-2 rounded-lg mr-3 group-hover:scale-110 transition-transform">
-                    <BarChart3 className="h-6 w-6 text-white" />
-                  </div>
-                  Analytics Dashboard
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Real-time insights on sales, popular items, peak hours, and profit margins
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white/90 backdrop-blur-sm group">
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl">
-                  <div className="bg-gradient-to-br from-teal-400 to-cyan-500 p-2 rounded-lg mr-3 group-hover:scale-110 transition-transform">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  Staff Management
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">
-                  Manage shifts, track performance, and streamline communication
-                </p>
-              </CardContent>
-            </Card>
+            {[
+              {
+                icon: CheckCircle,
+                title: "Smart Billing System",
+                desc: "Generate bills instantly with barcode scanning, split payments, and digital receipts",
+                gradient: "from-green-400 to-emerald-500",
+                glow: "shadow-green-500/40",
+                hoverGlow: "hover:shadow-green-500/60",
+              },
+              {
+                icon: Zap,
+                title: "AI Demand Prediction",
+                desc: "Predict food quantities needed based on historical data, weather, and events",
+                gradient: "from-blue-400 to-indigo-500",
+                glow: "shadow-blue-500/40",
+                hoverGlow: "hover:shadow-blue-500/60",
+              },
+              {
+                icon: Target,
+                title: "Dynamic Pricing",
+                desc: "Optimize discounts and pricing strategies to maximize profit and reduce waste",
+                gradient: "from-purple-400 to-violet-500",
+                glow: "shadow-purple-500/40",
+                hoverGlow: "hover:shadow-purple-500/60",
+              },
+              {
+                icon: CheckCircle,
+                title: "Inventory Management",
+                desc: "Track ingredients, monitor stock levels, and automate reorder notifications",
+                gradient: "from-orange-400 to-amber-500",
+                glow: "shadow-orange-500/40",
+                hoverGlow: "hover:shadow-orange-500/60",
+              },
+              {
+                icon: BarChart3,
+                title: "Analytics Dashboard",
+                desc: "Real-time insights on sales, popular items, peak hours, and profit margins",
+                gradient: "from-red-400 to-pink-500",
+                glow: "shadow-red-500/40",
+                hoverGlow: "hover:shadow-red-500/60",
+              },
+              {
+                icon: Users,
+                title: "Staff Management",
+                desc: "Manage shifts, track performance, and streamline communication",
+                gradient: "from-teal-400 to-cyan-500",
+                glow: "shadow-teal-500/40",
+                hoverGlow: "hover:shadow-teal-500/60",
+              },
+            ].map((feature, index) => (
+              <Card
+                key={index}
+                className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-white/90 backdrop-blur-sm group ${feature.hoverGlow}`}
+              >
+                <CardHeader>
+                  <CardTitle className="flex items-center text-xl">
+                    <div
+                      className={`bg-gradient-to-br ${feature.gradient} p-2 rounded-lg mr-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg ${feature.glow} group-hover:shadow-xl group-hover:${feature.glow}`}
+                    >
+                      <feature.icon className="h-6 w-6 text-white group-hover:animate-pulse" />
+                    </div>
+                    <span className="group-hover:text-gray-800 transition-colors">{feature.title}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -422,50 +408,63 @@ export default function CanteenManagementLanding() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110">
-                <span className="text-3xl font-bold text-white">1</span>
+            {[
+              {
+                step: "1",
+                title: "Sign Up",
+                desc: "Create your account and choose your plan. No credit card required for trial.",
+                gradient: "from-blue-500 to-indigo-600",
+                glow: "shadow-blue-500/50",
+                hoverColor: "group-hover:text-blue-600",
+                hoverScale: "group-hover:scale-110",
+              },
+              {
+                step: "2",
+                title: "Setup Menu",
+                desc: "Add your menu items, set prices, and configure your canteen preferences.",
+                gradient: "from-emerald-500 to-green-600",
+                glow: "shadow-emerald-500/50",
+                hoverColor: "group-hover:text-green-600",
+                hoverScale: "group-hover:scale-110",
+              },
+              {
+                step: "3",
+                title: "Train Staff",
+                desc: "Our team provides comprehensive training to get your staff up to speed quickly.",
+                gradient: "from-purple-500 to-violet-600",
+                glow: "shadow-purple-500/50",
+                hoverColor: "group-hover:text-purple-600",
+                hoverScale: "group-hover:scale-110",
+              },
+              {
+                step: "4",
+                title: "Go Live",
+                desc: "Start serving customers with your new smart canteen management system!",
+                gradient: "from-orange-500 to-amber-600",
+                glow: "shadow-orange-500/50",
+                hoverColor: "group-hover:text-orange-600",
+                hoverScale: "group-hover:scale-110",
+              },
+            ].map((item, index) => (
+              <div key={index} className="text-center group cursor-pointer">
+                <div
+                  className={`bg-gradient-to-br ${item.gradient} w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg ${item.glow} group-hover:shadow-2xl group-hover:${item.glow} transition-all duration-700 transform group-hover:scale-125 group-hover:-translate-y-2 group-hover:rotate-6`}
+                >
+                  <span className="text-3xl font-bold text-white group-hover:animate-pulse">{item.step}</span>
+                </div>
+                <h4
+                  className={`text-2xl font-bold mb-4 transition-all duration-500 ${item.hoverColor} ${item.hoverScale}`}
+                >
+                  {item.title}
+                </h4>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
-              <h4 className="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors">Sign Up</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Create your account and choose your plan. No credit card required for trial.
-              </p>
-            </div>
-
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-emerald-500 to-green-600 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110">
-                <span className="text-3xl font-bold text-white">2</span>
-              </div>
-              <h4 className="text-2xl font-bold mb-4 group-hover:text-green-600 transition-colors">Setup Menu</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Add your menu items, set prices, and configure your canteen preferences.
-              </p>
-            </div>
-
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-purple-500 to-violet-600 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110">
-                <span className="text-3xl font-bold text-white">3</span>
-              </div>
-              <h4 className="text-2xl font-bold mb-4 group-hover:text-purple-600 transition-colors">Train Staff</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Our team provides comprehensive training to get your staff up to speed quickly.
-              </p>
-            </div>
-
-            <div className="text-center group cursor-pointer">
-              <div className="bg-gradient-to-br from-orange-500 to-amber-600 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110">
-                <span className="text-3xl font-bold text-white">4</span>
-              </div>
-              <h4 className="text-2xl font-bold mb-4 group-hover:text-orange-600 transition-colors">Go Live</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Start serving customers with your new smart canteen management system!
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Component 5: Additional Characteristics */}
+      {/* Component 5: Additional Characteristics - Why Choose Our System */}
       <section className="px-6 py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -474,83 +473,79 @@ export default function CanteenManagementLanding() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-              <div className="bg-gradient-to-br from-blue-400 to-indigo-500 p-3 rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
-                <Shield className="h-8 w-8 text-white" />
+            {[
+              {
+                icon: Shield,
+                title: "Bank-Grade Security",
+                desc: "Your data is protected with enterprise-level encryption and security protocols.",
+                gradient: "from-blue-400 to-indigo-500",
+                glow: "shadow-blue-500/40",
+                hoverColor: "hover:text-blue-600",
+                hoverGlow: "hover:shadow-blue-500/60",
+              },
+              {
+                icon: Clock,
+                title: "99.9% Uptime",
+                desc: "Reliable cloud infrastructure ensures your canteen never stops running.",
+                gradient: "from-green-400 to-emerald-500",
+                glow: "shadow-green-500/40",
+                hoverColor: "hover:text-green-600",
+                hoverGlow: "hover:shadow-green-500/60",
+              },
+              {
+                icon: Users,
+                title: "24/7 Support",
+                desc: "Our dedicated support team is always ready to help you succeed.",
+                gradient: "from-purple-400 to-violet-500",
+                glow: "shadow-purple-500/40",
+                hoverColor: "hover:text-purple-600",
+                hoverGlow: "hover:shadow-purple-500/60",
+              },
+              {
+                icon: TrendingUp,
+                title: "Scalable Solution",
+                desc: "Grows with your business from single canteen to multi-location chains.",
+                gradient: "from-orange-400 to-amber-500",
+                glow: "shadow-orange-500/40",
+                hoverColor: "hover:text-orange-600",
+                hoverGlow: "hover:shadow-orange-500/60",
+              },
+              {
+                icon: BarChart3,
+                title: "Real-time Analytics",
+                desc: "Make data-driven decisions with comprehensive reporting and insights.",
+                gradient: "from-red-400 to-pink-500",
+                glow: "shadow-red-500/40",
+                hoverColor: "hover:text-red-600",
+                hoverGlow: "hover:shadow-red-500/60",
+              },
+              {
+                icon: CheckCircle,
+                title: "Easy Integration",
+                desc: "Seamlessly integrates with existing POS systems and payment processors.",
+                gradient: "from-teal-400 to-cyan-500",
+                glow: "shadow-teal-500/40",
+                hoverColor: "hover:text-teal-600",
+                hoverGlow: "hover:shadow-teal-500/60",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 group ${item.hoverGlow}`}
+              >
+                <div
+                  className={`bg-gradient-to-br ${item.gradient} p-3 rounded-2xl shadow-lg ${item.glow} group-hover:shadow-xl group-hover:${item.glow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-700`}
+                >
+                  <item.icon className="h-8 w-8 text-white group-hover:animate-pulse" />
+                </div>
+                <div>
+                  <h4 className={`text-xl font-bold mb-3 ${item.hoverColor} transition-colors duration-300`}>
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
-                  Bank-Grade Security
-                </h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Your data is protected with enterprise-level encryption and security protocols.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-              <div className="bg-gradient-to-br from-green-400 to-emerald-500 p-3 rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
-                <Clock className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 group-hover:text-green-600 transition-colors">99.9% Uptime</h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Reliable cloud infrastructure ensures your canteen never stops running.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-              <div className="bg-gradient-to-br from-purple-400 to-violet-500 p-3 rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
-                <Users className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 group-hover:text-purple-600 transition-colors">24/7 Support</h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Our dedicated support team is always ready to help you succeed.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-              <div className="bg-gradient-to-br from-orange-400 to-amber-500 p-3 rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 group-hover:text-orange-600 transition-colors">
-                  Scalable Solution
-                </h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Grows with your business from single canteen to multi-location chains.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-              <div className="bg-gradient-to-br from-red-400 to-pink-500 p-3 rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
-                <BarChart3 className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 group-hover:text-red-600 transition-colors">
-                  Real-time Analytics
-                </h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Make data-driven decisions with comprehensive reporting and insights.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-              <div className="bg-gradient-to-br from-teal-400 to-cyan-500 p-3 rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
-                <CheckCircle className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 group-hover:text-teal-600 transition-colors">Easy Integration</h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Seamlessly integrates with existing POS systems and payment processors.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -564,71 +559,53 @@ export default function CanteenManagementLanding() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-yellow-50 group">
-              <CardHeader>
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 fill-yellow-400 text-yellow-400 group-hover:scale-110 transition-transform"
-                      style={{ transitionDelay: `${i * 50}ms` }}
-                    />
-                  ))}
-                </div>
-                <CardTitle className="text-xl">Sarah Johnson</CardTitle>
-                <CardDescription className="text-gray-500">University Canteen Manager</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "This system revolutionized our operations! We reduced food waste by 45% and increased profits by 30%.
-                  The AI predictions are incredibly accurate."
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-blue-50 group">
-              <CardHeader>
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 fill-yellow-400 text-yellow-400 group-hover:scale-110 transition-transform"
-                      style={{ transitionDelay: `${i * 50}ms` }}
-                    />
-                  ))}
-                </div>
-                <CardTitle className="text-xl">Mike Chen</CardTitle>
-                <CardDescription className="text-gray-500">Corporate Cafeteria Director</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "The billing system is lightning fast and the analytics help us make better decisions daily. Our
-                  customers love the improved service speed."
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-white to-green-50 group">
-              <CardHeader>
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 fill-yellow-400 text-yellow-400 group-hover:scale-110 transition-transform"
-                      style={{ transitionDelay: `${i * 50}ms` }}
-                    />
-                  ))}
-                </div>
-                <CardTitle className="text-xl">Priya Patel</CardTitle>
-                <CardDescription className="text-gray-500">School Canteen Owner</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "Setup was incredibly easy and the support team was amazing. We're now serving 500+ students
-                  efficiently with minimal waste."
-                </p>
-              </CardContent>
-            </Card>
+            {[
+              {
+                name: "Sarah Johnson",
+                role: "University Canteen Manager",
+                testimonial:
+                  "This system revolutionized our operations! We reduced food waste by 45% and increased profits by 30%. The AI predictions are incredibly accurate.",
+                bgGradient: "from-white to-yellow-50",
+              },
+              {
+                name: "Mike Chen",
+                role: "Corporate Cafeteria Director",
+                testimonial:
+                  "The billing system is lightning fast and the analytics help us make better decisions daily. Our customers love the improved service speed.",
+                bgGradient: "from-white to-blue-50",
+              },
+              {
+                name: "Priya Patel",
+                role: "School Canteen Owner",
+                testimonial:
+                  "Setup was incredibly easy and the support team was amazing. We're now serving 500+ students efficiently with minimal waste.",
+                bgGradient: "from-white to-green-50",
+              },
+            ].map((testimonial, index) => (
+              <Card
+                key={index}
+                className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br ${testimonial.bgGradient} group`}
+              >
+                <CardHeader>
+                  <div className="flex items-center space-x-1 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-5 w-5 fill-yellow-400 text-yellow-400 group-hover:scale-125 transition-all duration-500 group-hover:animate-pulse"
+                        style={{ transitionDelay: `${i * 150}ms` }}
+                      />
+                    ))}
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-gray-800 transition-colors">
+                    {testimonial.name}
+                  </CardTitle>
+                  <CardDescription className="text-gray-500">{testimonial.role}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed italic">"{testimonial.testimonial}"</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -645,16 +622,16 @@ export default function CanteenManagementLanding() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100 px-10 py-4 text-lg rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+              className="bg-white text-blue-600 hover:bg-gray-100 px-10 py-4 text-lg rounded-xl shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 group"
             >
-              <ArrowRight className="mr-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="mr-3 h-6 w-6 group-hover:translate-x-2 group-hover:animate-pulse transition-all duration-300" />
               Start Free Trial
-              <Sparkles className="ml-2 h-5 w-5" />
+              <Sparkles className="ml-2 h-5 w-5 group-hover:animate-spin" />
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-10 py-4 text-lg rounded-xl bg-transparent transition-all duration-300 transform hover:scale-105"
+              className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-10 py-4 text-lg rounded-xl bg-transparent transition-all duration-700 transform hover:scale-110 hover:-translate-y-2"
             >
               Book a Demo
             </Button>
@@ -670,10 +647,12 @@ export default function CanteenManagementLanding() {
       <footer className="bg-gray-900 text-white px-6 py-12">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center space-x-4 mb-6 group">
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-              <Utensils className="h-8 w-8 text-white" />
+            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+              <Utensils className="h-8 w-8 text-white group-hover:animate-pulse" />
             </div>
-            <span className="text-2xl font-bold">Canteen Management System</span>
+            <span className="text-2xl font-bold group-hover:text-blue-400 transition-colors">
+              Canteen Management System
+            </span>
           </div>
           <p className="text-gray-400 text-lg">© 2024 Canteen Management System. All rights reserved.</p>
         </div>
