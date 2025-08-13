@@ -24,6 +24,7 @@ import { useState, useEffect } from "react"
 export default function CanteenManagementLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
+  const [activeHovers, setActiveHovers] = useState({})
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +50,16 @@ export default function CanteenManagementLanding() {
 
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleTouchStart = (id) => {
+    setActiveHovers((prev) => ({ ...prev, [id]: true }))
+  }
+
+  const handleTouchEnd = (id) => {
+    setTimeout(() => {
+      setActiveHovers((prev) => ({ ...prev, [id]: false }))
+    }, 300) // Keep effect for 300ms after touch ends
+  }
 
   const getLinkStyles = (section) => {
     const isActive = activeSection === section
@@ -415,8 +426,8 @@ export default function CanteenManagementLanding() {
                 desc: "Create your account and choose your plan. No credit card required for trial.",
                 gradient: "from-blue-500 to-indigo-600",
                 glow: "shadow-blue-500/50",
-                hoverColor: "group-hover:text-blue-600",
-                hoverScale: "group-hover:scale-110",
+                hoverColor: "text-blue-600",
+                hoverScale: "scale-110",
               },
               {
                 step: "2",
@@ -424,8 +435,8 @@ export default function CanteenManagementLanding() {
                 desc: "Add your menu items, set prices, and configure your canteen preferences.",
                 gradient: "from-emerald-500 to-green-600",
                 glow: "shadow-emerald-500/50",
-                hoverColor: "group-hover:text-green-600",
-                hoverScale: "group-hover:scale-110",
+                hoverColor: "text-green-600",
+                hoverScale: "scale-110",
               },
               {
                 step: "3",
@@ -433,8 +444,8 @@ export default function CanteenManagementLanding() {
                 desc: "Our team provides comprehensive training to get your staff up to speed quickly.",
                 gradient: "from-purple-500 to-violet-600",
                 glow: "shadow-purple-500/50",
-                hoverColor: "group-hover:text-purple-600",
-                hoverScale: "group-hover:scale-110",
+                hoverColor: "text-purple-600",
+                hoverScale: "scale-110",
               },
               {
                 step: "4",
@@ -442,18 +453,35 @@ export default function CanteenManagementLanding() {
                 desc: "Start serving customers with your new smart canteen management system!",
                 gradient: "from-orange-500 to-amber-600",
                 glow: "shadow-orange-500/50",
-                hoverColor: "group-hover:text-orange-600",
-                hoverScale: "group-hover:scale-110",
+                hoverColor: "text-orange-600",
+                hoverScale: "scale-110",
               },
             ].map((item, index) => (
-              <div key={index} className="text-center group cursor-pointer">
+              <div
+                key={index}
+                className="text-center group cursor-pointer"
+                onTouchStart={() => handleTouchStart(`how-it-works-${index}`)}
+                onTouchEnd={() => handleTouchEnd(`how-it-works-${index}`)}
+              >
                 <div
-                  className={`bg-gradient-to-br ${item.gradient} w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg ${item.glow} group-hover:shadow-2xl group-hover:${item.glow} transition-all duration-700 transform group-hover:scale-125 group-hover:-translate-y-2 group-hover:rotate-6`}
+                  className={`bg-gradient-to-br ${item.gradient} w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg ${item.glow} group-hover:shadow-2xl group-hover:${item.glow} transition-all duration-700 transform group-hover:scale-125 group-hover:-translate-y-2 group-hover:rotate-6 ${
+                    activeHovers[`how-it-works-${index}`]
+                      ? `shadow-2xl ${item.glow} scale-125 -translate-y-2 rotate-6`
+                      : ""
+                  }`}
                 >
-                  <span className="text-3xl font-bold text-white group-hover:animate-pulse">{item.step}</span>
+                  <span
+                    className={`text-3xl font-bold text-white group-hover:animate-pulse ${
+                      activeHovers[`how-it-works-${index}`] ? "animate-pulse" : ""
+                    }`}
+                  >
+                    {item.step}
+                  </span>
                 </div>
                 <h4
-                  className={`text-2xl font-bold mb-4 transition-all duration-500 ${item.hoverColor} ${item.hoverScale}`}
+                  className={`text-2xl font-bold mb-4 transition-all duration-500 group-hover:${item.hoverColor} group-hover:${item.hoverScale} ${
+                    activeHovers[`how-it-works-${index}`] ? `${item.hoverColor} ${item.hoverScale}` : ""
+                  }`}
                 >
                   {item.title}
                 </h4>
@@ -531,15 +559,31 @@ export default function CanteenManagementLanding() {
             ].map((item, index) => (
               <div
                 key={index}
-                className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 group ${item.hoverGlow}`}
+                className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 group ${item.hoverGlow} ${
+                  activeHovers[`why-choose-${index}`]
+                    ? `shadow-2xl scale-105 -translate-y-2 ${item.hoverGlow.replace("hover:", "")}`
+                    : ""
+                }`}
+                onTouchStart={() => handleTouchStart(`why-choose-${index}`)}
+                onTouchEnd={() => handleTouchEnd(`why-choose-${index}`)}
               >
                 <div
-                  className={`bg-gradient-to-br ${item.gradient} p-3 rounded-2xl shadow-lg ${item.glow} group-hover:shadow-xl group-hover:${item.glow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-700`}
+                  className={`bg-gradient-to-br ${item.gradient} p-3 rounded-2xl shadow-lg ${item.glow} group-hover:shadow-xl group-hover:${item.glow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 ${
+                    activeHovers[`why-choose-${index}`] ? `shadow-xl ${item.glow} scale-125 rotate-12` : ""
+                  }`}
                 >
-                  <item.icon className="h-8 w-8 text-white group-hover:animate-pulse" />
+                  <item.icon
+                    className={`h-8 w-8 text-white group-hover:animate-pulse ${
+                      activeHovers[`why-choose-${index}`] ? "animate-pulse" : ""
+                    }`}
+                  />
                 </div>
                 <div>
-                  <h4 className={`text-xl font-bold mb-3 ${item.hoverColor} transition-colors duration-300`}>
+                  <h4
+                    className={`text-xl font-bold mb-3 ${item.hoverColor} transition-colors duration-300 ${
+                      activeHovers[`why-choose-${index}`] ? item.hoverColor.replace("hover:", "") : ""
+                    }`}
+                  >
                     {item.title}
                   </h4>
                   <p className="text-gray-600 leading-relaxed">{item.desc}</p>
