@@ -391,7 +391,7 @@ export default function CanteenManagementLanding() {
                 onTouchEnd={() => handleTouchEnd(`stat-${index}`)}
               >
                 <div
-                  className={`bg-gradient-to-br ${stat.gradient} text-white p-8 rounded-2xl shadow-lg group-hover:shadow-2xl ${stat.glow} group-hover:${stat.glow} transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 ${
+                  className={`bg-gradient-to-br ${stat.gradient} text-white p-8 rounded-2xl shadow-lg group-hover:shadow-2xl ${stat.glow} group-hover:shadow-2xl group-hover:${stat.glow} transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 ${
                     activeHovers[`stat-${index}`] ? `shadow-2xl ${stat.glow} scale-110 -translate-y-2` : ""
                   }`}
                 >
@@ -628,7 +628,7 @@ export default function CanteenManagementLanding() {
                 desc: "Our team provides comprehensive training to get your staff up to speed quickly.",
                 gradient: "from-purple-500 to-violet-600",
                 glow: "shadow-purple-500/50",
-                hoverColor: "text-purple-600",
+                hoverColor: "text-purple-600", // Fixed hover color for step 3
                 hoverScale: "scale-110",
               },
               {
@@ -637,7 +637,7 @@ export default function CanteenManagementLanding() {
                 desc: "Start serving customers with your new smart canteen management system!",
                 gradient: "from-orange-500 to-amber-600",
                 glow: "shadow-orange-500/50",
-                hoverColor: "text-orange-600",
+                hoverColor: "text-orange-600", // Fixed hover color for step 4
                 hoverScale: "scale-110",
               },
             ].map((item, index) => (
@@ -663,9 +663,9 @@ export default function CanteenManagementLanding() {
                   </span>
                 </div>
                 <h4
-                  className={`text-2xl font-bold mb-4 transition-all duration-500 group-hover:${item.hoverColor} group-hover:${item.hoverScale} ${
+                  className={`text-2xl font-bold mb-4 text-gray-900 transition-all duration-500 ${
                     activeHovers[`how-it-works-${index}`] ? `${item.hoverColor} ${item.hoverScale}` : ""
-                  }`}
+                  } group-hover:${item.hoverColor} group-hover:${item.hoverScale}`}
                 >
                   {item.title}
                 </h4>
@@ -692,9 +692,9 @@ export default function CanteenManagementLanding() {
                 desc: "Your data is protected with enterprise-level encryption and security protocols.",
                 gradient: "from-blue-400 to-indigo-500",
                 glow: "shadow-blue-500/40",
-                hoverColor: "hover:text-blue-600",
+                hoverColor: "text-blue-600",
                 hoverGlow: "hover:shadow-blue-500/60",
-                boxGlow: "shadow-blue-500/30", // Added box glow for mobile
+                boxGlow: "shadow-blue-500/30",
               },
               {
                 icon: Clock,
@@ -702,9 +702,9 @@ export default function CanteenManagementLanding() {
                 desc: "Reliable cloud infrastructure ensures your canteen never stops running.",
                 gradient: "from-green-400 to-emerald-500",
                 glow: "shadow-green-500/40",
-                hoverColor: "hover:text-green-600",
+                hoverColor: "text-green-600",
                 hoverGlow: "hover:shadow-green-500/60",
-                boxGlow: "shadow-green-500/30", // Added box glow for mobile
+                boxGlow: "shadow-green-500/30",
               },
               {
                 icon: Users,
@@ -712,9 +712,9 @@ export default function CanteenManagementLanding() {
                 desc: "Our dedicated support team is always ready to help you succeed.",
                 gradient: "from-purple-400 to-violet-500",
                 glow: "shadow-purple-500/40",
-                hoverColor: "hover:text-purple-600",
+                hoverColor: "text-purple-600",
                 hoverGlow: "hover:shadow-purple-500/60",
-                boxGlow: "shadow-purple-500/30", // Added box glow for mobile
+                boxGlow: "shadow-purple-500/30",
               },
               {
                 icon: TrendingUp,
@@ -722,9 +722,9 @@ export default function CanteenManagementLanding() {
                 desc: "Grows with your business from single canteen to multi-location chains.",
                 gradient: "from-orange-400 to-amber-500",
                 glow: "shadow-orange-500/40",
-                hoverColor: "hover:text-orange-600",
+                hoverColor: "text-orange-600",
                 hoverGlow: "hover:shadow-orange-500/60",
-                boxGlow: "shadow-orange-500/30", // Added box glow for mobile
+                boxGlow: "shadow-orange-500/30",
               },
               {
                 icon: BarChart3,
@@ -732,9 +732,9 @@ export default function CanteenManagementLanding() {
                 desc: "Make data-driven decisions with comprehensive reporting and insights.",
                 gradient: "from-red-400 to-pink-500",
                 glow: "shadow-red-500/40",
-                hoverColor: "hover:text-red-600",
+                hoverColor: "text-red-600",
                 hoverGlow: "hover:shadow-red-500/60",
-                boxGlow: "shadow-red-500/30", // Added box glow for mobile
+                boxGlow: "shadow-red-500/30",
               },
               {
                 icon: CheckCircle,
@@ -742,23 +742,21 @@ export default function CanteenManagementLanding() {
                 desc: "Seamlessly integrates with existing POS systems and payment processors.",
                 gradient: "from-teal-400 to-cyan-500",
                 glow: "shadow-teal-500/40",
-                hoverColor: "hover:text-teal-600",
+                hoverColor: "text-teal-600",
                 hoverGlow: "hover:shadow-teal-500/60",
-                boxGlow: "shadow-teal-500/30", // Added box glow for mobile
+                boxGlow: "shadow-teal-500/30",
               },
             ].map((item, index) => (
               <div
                 key={index}
-                className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 group ${item.hoverGlow} ${
-                  activeHovers[`why-choose-${index}`]
-                    ? `shadow-2xl scale-105 -translate-y-2 ${item.boxGlow}` // Added box glow for mobile touch
-                    : ""
+                className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg transition-all duration-700 transform group ${item.hoverGlow} hover:shadow-2xl hover:scale-105 hover:-translate-y-2 ${
+                  activeHovers[`why-choose-${index}`] ? `shadow-2xl scale-105 -translate-y-2 ${item.boxGlow}` : ""
                 }`}
                 onTouchStart={() => handleTouchStart(`why-choose-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`why-choose-${index}`)}
               >
                 <div
-                  className={`bg-gradient-to-br ${item.gradient} p-3 rounded-2xl shadow-lg ${item.glow} group-hover:shadow-xl group-hover:${item.glow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 ${
+                  className={`bg-gradient-to-br ${item.gradient} p-3 rounded-2xl shadow-lg ${item.glow} transition-all duration-700 group-hover:shadow-xl group-hover:${item.glow} group-hover:scale-125 group-hover:rotate-12 ${
                     activeHovers[`why-choose-${index}`] ? `shadow-xl ${item.glow} scale-125 rotate-12` : ""
                   }`}
                 >
@@ -770,7 +768,7 @@ export default function CanteenManagementLanding() {
                 </div>
                 <div>
                   <h4
-                    className={`text-xl font-bold mb-3 ${item.hoverColor} transition-colors duration-300 ${
+                    className={`text-xl font-bold mb-3 text-gray-900 transition-colors duration-300 group-hover:${item.hoverColor} ${
                       activeHovers[`why-choose-${index}`] ? item.hoverColor.replace("hover:", "") : ""
                     }`}
                   >
