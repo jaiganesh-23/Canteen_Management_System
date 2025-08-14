@@ -18,6 +18,8 @@ import {
   Target,
   Menu,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -25,6 +27,30 @@ export default function CanteenManagementLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
   const [activeHovers, setActiveHovers] = useState({})
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const heroImages = [
+    {
+      url: "/modern-canteen-kitchen.png",
+      alt: "Modern canteen kitchen with chefs preparing fresh food",
+    },
+    {
+      url: "/busy-canteen.png",
+      alt: "Busy canteen dining area with students",
+    },
+    {
+      url: "/canteen-staff-ordering.png",
+      alt: "Canteen staff using digital ordering system",
+    },
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+    }, 5000) // Change image every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [heroImages.length])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +84,7 @@ export default function CanteenManagementLanding() {
   const handleTouchEnd = (id) => {
     setTimeout(() => {
       setActiveHovers((prev) => ({ ...prev, [id]: false }))
-    }, 300) // Keep effect for 300ms after touch ends
+    }, 300)
   }
 
   const getLinkStyles = (section) => {
@@ -66,6 +92,14 @@ export default function CanteenManagementLanding() {
     return `font-medium transition-all duration-300 ${
       isActive ? "text-blue-600 border-b-2 border-blue-600 pb-1" : "text-gray-700 hover:text-blue-600"
     }`
+  }
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + heroImages.length) % heroImages.length)
   }
 
   return (
@@ -186,169 +220,212 @@ export default function CanteenManagementLanding() {
         </div>
       </nav>
 
-      {/* Component 1: Hero Section */}
-      <section
-        id="hero"
-        className="px-6 py-20 max-w-7xl mx-auto relative mt-16"
-        style={{
-          backgroundImage: `url('/modern-canteen-kitchen.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          minHeight: "80vh",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/30 rounded-lg"></div>
+      {/* Component 1: Hero Section with Carousel */}
+      <section id="hero" className="px-6 py-20 max-w-7xl mx-auto relative mt-16 overflow-hidden">
+        <div className="relative h-[80vh] rounded-3xl overflow-hidden shadow-2xl">
+          {/* Carousel Images */}
+          <div className="relative w-full h-full">
+            {heroImages.map((image, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                  index === currentImageIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                }`}
+                style={{
+                  backgroundImage: `url('${image.url}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                {/* Subtle gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40"></div>
+              </div>
+            ))}
+          </div>
 
-        <div className="text-center space-y-10 relative z-10 flex flex-col justify-center min-h-[70vh]">
-          <div
-            className="flex justify-center items-center space-x-4 mb-8 group"
-            onTouchStart={() => handleTouchStart("hero-logo")}
-            onTouchEnd={() => handleTouchEnd("hero-logo")}
+          <button
+            onClick={prevImage}
+            className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-20"
+            onTouchStart={() => handleTouchStart("carousel-prev")}
+            onTouchEnd={() => handleTouchEnd("carousel-prev")}
           >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+
+          <button
+            onClick={nextImage}
+            className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-20"
+            onTouchStart={() => handleTouchStart("carousel-next")}
+            onTouchEnd={() => handleTouchEnd("carousel-next")}
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentImageIndex ? "bg-white shadow-lg scale-125" : "bg-white/50 hover:bg-white/80"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Hero Content Overlay */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center space-y-10 z-10 px-6">
             <div
-              className={`bg-white/20 backdrop-blur-sm p-4 rounded-2xl shadow-lg group-hover:shadow-xl group-hover:shadow-white/50 transition-all duration-500 group-hover:scale-105 group-hover:rotate-6 border border-white/30 ${
-                activeHovers["hero-logo"] ? "shadow-xl shadow-white/50 scale-105 rotate-6" : ""
-              }`}
+              className="flex justify-center items-center space-x-4 mb-8 group"
+              onTouchStart={() => handleTouchStart("hero-logo")}
+              onTouchEnd={() => handleTouchEnd("hero-logo")}
             >
-              <Utensils
-                className={`h-10 w-10 text-white animate-pulse ${activeHovers["hero-logo"] ? "animate-spin" : ""}`}
-              />
+              <div
+                className={`bg-white/20 backdrop-blur-sm p-4 rounded-2xl shadow-lg group-hover:shadow-xl group-hover:shadow-white/50 transition-all duration-500 group-hover:scale-105 group-hover:rotate-6 border border-white/30 ${
+                  activeHovers["hero-logo"] ? "shadow-xl shadow-white/50 scale-105 rotate-6" : ""
+                }`}
+              >
+                <Utensils
+                  className={`h-10 w-10 text-white animate-pulse ${activeHovers["hero-logo"] ? "animate-spin" : ""}`}
+                />
+              </div>
+              <h1 className="text-5xl font-bold text-white drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+                Canteen Pro
+              </h1>
             </div>
-            <h1 className="text-5xl font-bold text-white drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
-              Canteen Management System
-            </h1>
-          </div>
 
-          <div className="relative">
-            <h2 className="text-3xl md:text-4xl font-bold text-white max-w-5xl mx-auto leading-tight drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
-              Smart Canteen Management System:
-              <span
-                className="relative inline-block mx-2 group"
-                onTouchStart={() => handleTouchStart("hero-serve")}
-                onTouchEnd={() => handleTouchEnd("hero-serve")}
-              >
+            <div className="relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-white max-w-5xl mx-auto leading-tight drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+                Smart Canteen Management System:
                 <span
-                  className={`text-blue-200 group-hover:text-blue-100 transition-colors ${
-                    activeHovers["hero-serve"] ? "text-blue-100" : ""
-                  }`}
+                  className="relative inline-block mx-2 group"
+                  onTouchStart={() => handleTouchStart("hero-serve")}
+                  onTouchEnd={() => handleTouchEnd("hero-serve")}
                 >
-                  Serve Smart
+                  <span
+                    className={`text-blue-200 group-hover:text-blue-100 transition-colors ${
+                      activeHovers["hero-serve"] ? "text-blue-100" : ""
+                    }`}
+                  >
+                    Serve Smart
+                  </span>
+                  <div
+                    className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse ${
+                      activeHovers["hero-serve"] ? "opacity-100" : ""
+                    }`}
+                  ></div>
                 </span>
-                <div
-                  className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse ${
-                    activeHovers["hero-serve"] ? "opacity-100" : ""
-                  }`}
-                ></div>
-              </span>
-              ,
-              <span
-                className="relative inline-block mx-2 group"
-                onTouchStart={() => handleTouchStart("hero-waste")}
-                onTouchEnd={() => handleTouchEnd("hero-waste")}
-              >
+                ,
                 <span
-                  className={`text-emerald-200 group-hover:text-emerald-100 transition-colors ${
-                    activeHovers["hero-waste"] ? "text-emerald-100" : ""
-                  }`}
+                  className="relative inline-block mx-2 group"
+                  onTouchStart={() => handleTouchStart("hero-waste")}
+                  onTouchEnd={() => handleTouchEnd("hero-waste")}
                 >
-                  Waste Less
+                  <span
+                    className={`text-emerald-200 group-hover:text-emerald-100 transition-colors ${
+                      activeHovers["hero-waste"] ? "text-emerald-100" : ""
+                    }`}
+                  >
+                    Waste Less
+                  </span>
+                  <div
+                    className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-100 ${
+                      activeHovers["hero-waste"] ? "opacity-100" : ""
+                    }`}
+                  ></div>
                 </span>
-                <div
-                  className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-100 ${
-                    activeHovers["hero-waste"] ? "opacity-100" : ""
-                  }`}
-                ></div>
-              </span>
-              ,
-              <span
-                className="relative inline-block mx-2 group"
-                onTouchStart={() => handleTouchStart("hero-organize")}
-                onTouchEnd={() => handleTouchEnd("hero-organize")}
-              >
+                ,
                 <span
-                  className={`text-purple-200 group-hover:text-purple-100 transition-colors ${
-                    activeHovers["hero-organize"] ? "text-purple-100" : ""
-                  }`}
+                  className="relative inline-block mx-2 group"
+                  onTouchStart={() => handleTouchStart("hero-organize")}
+                  onTouchEnd={() => handleTouchEnd("hero-organize")}
                 >
-                  Organize Better
+                  <span
+                    className={`text-purple-200 group-hover:text-purple-100 transition-colors ${
+                      activeHovers["hero-organize"] ? "text-purple-100" : ""
+                    }`}
+                  >
+                    Organize Better
+                  </span>
+                  <div
+                    className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-200 ${
+                      activeHovers["hero-organize"] ? "opacity-100" : ""
+                    }`}
+                  ></div>
                 </span>
-                <div
-                  className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-200 ${
-                    activeHovers["hero-organize"] ? "opacity-100" : ""
-                  }`}
-                ></div>
-              </span>
-              and
-              <span
-                className="relative inline-block mx-2 group"
-                onTouchStart={() => handleTouchStart("hero-profit")}
-                onTouchEnd={() => handleTouchEnd("hero-profit")}
-              >
+                and
                 <span
-                  className={`text-amber-200 group-hover:text-amber-100 transition-colors ${
-                    activeHovers["hero-profit"] ? "text-amber-100" : ""
-                  }`}
+                  className="relative inline-block mx-2 group"
+                  onTouchStart={() => handleTouchStart("hero-profit")}
+                  onTouchEnd={() => handleTouchEnd("hero-profit")}
                 >
-                  Profit More
+                  <span
+                    className={`text-amber-200 group-hover:text-amber-100 transition-colors ${
+                      activeHovers["hero-profit"] ? "text-amber-100" : ""
+                    }`}
+                  >
+                    Profit More
+                  </span>
+                  <div
+                    className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-300 ${
+                      activeHovers["hero-profit"] ? "opacity-100" : ""
+                    }`}
+                  ></div>
                 </span>
-                <div
-                  className={`absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-80 group-hover:opacity-100 transition-opacity animate-pulse delay-300 ${
-                    activeHovers["hero-profit"] ? "opacity-100" : ""
-                  }`}
-                ></div>
-              </span>
-            </h2>
-          </div>
+              </h2>
+            </div>
 
-          <p className="text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)]">
-            Transform your canteen operations with our intelligent management system. Generate bills instantly, predict
-            food quantities with AI, optimize discounts for maximum profit, and streamline your entire workflow.
-          </p>
+            <p className="text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)]">
+              Transform your canteen operations with our intelligent management system. Generate bills instantly,
+              predict food quantities with AI, optimize discounts for maximum profit, and streamline your entire
+              workflow.
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button
-              size="lg"
-              className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
-                activeHovers["hero-getstarted"] ? "shadow-3xl shadow-blue-500/30 scale-110 -translate-y-1" : ""
-              }`}
-              onTouchStart={() => handleTouchStart("hero-getstarted")}
-              onTouchEnd={() => handleTouchEnd("hero-getstarted")}
-            >
-              <Play
-                className={`mr-3 h-6 w-6 group-hover:animate-spin ${
-                  activeHovers["hero-getstarted"] ? "animate-spin" : ""
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Button
+                size="lg"
+                className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
+                  activeHovers["hero-getstarted"] ? "shadow-3xl shadow-blue-500/30 scale-110 -translate-y-1" : ""
                 }`}
-              />
-              Get Started Free
-              <Sparkles
-                className={`ml-2 h-5 w-5 group-hover:animate-pulse ${
-                  activeHovers["hero-getstarted"] ? "animate-pulse" : ""
-                }`}
-              />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className={`px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 hover:shadow-2xl hover:shadow-white/30 backdrop-blur-sm transition-all duration-500 group bg-transparent shadow-2xl hover:scale-110 hover:-translate-y-1 ${
-                activeHovers["hero-demo"] ? "bg-white/20 shadow-2xl shadow-white/30 scale-110 -translate-y-1" : ""
-              }`}
-              onTouchStart={() => handleTouchStart("hero-demo")}
-              onTouchEnd={() => handleTouchEnd("hero-demo")}
-            >
-              <span
-                className={`group-hover:text-blue-100 transition-colors ${
-                  activeHovers["hero-demo"] ? "text-blue-100" : ""
-                }`}
+                onTouchStart={() => handleTouchStart("hero-getstarted")}
+                onTouchEnd={() => handleTouchEnd("hero-getstarted")}
               >
-                Watch Demo
-              </span>
-              <ArrowRight
-                className={`ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300 ${
-                  activeHovers["hero-demo"] ? "translate-x-2" : ""
+                <Play
+                  className={`mr-3 h-6 w-6 group-hover:animate-spin ${
+                    activeHovers["hero-getstarted"] ? "animate-spin" : ""
+                  }`}
+                />
+                Get Started Free
+                <Sparkles
+                  className={`ml-2 h-5 w-5 group-hover:animate-pulse ${
+                    activeHovers["hero-getstarted"] ? "animate-pulse" : ""
+                  }`}
+                />
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className={`px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 hover:shadow-2xl hover:shadow-white/30 backdrop-blur-sm transition-all duration-500 group bg-transparent shadow-2xl hover:scale-110 hover:-translate-y-1 ${
+                  activeHovers["hero-demo"] ? "bg-white/20 shadow-2xl shadow-white/30 scale-110 -translate-y-1" : ""
                 }`}
-              />
-            </Button>
+                onTouchStart={() => handleTouchStart("hero-demo")}
+                onTouchEnd={() => handleTouchEnd("hero-demo")}
+              >
+                <span
+                  className={`group-hover:text-blue-100 transition-colors ${
+                    activeHovers["hero-demo"] ? "text-blue-100" : ""
+                  }`}
+                >
+                  Watch Demo
+                </span>
+                <ArrowRight
+                  className={`ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300 ${
+                    activeHovers["hero-demo"] ? "translate-x-2" : ""
+                  }`}
+                />
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -505,7 +582,7 @@ export default function CanteenManagementLanding() {
                 gradient: "from-green-400 to-emerald-500",
                 glow: "shadow-green-500/40",
                 hoverGlow: "hover:shadow-green-500/60",
-                boxGlow: "shadow-green-500/30", // Added box glow for mobile
+                boxGlow: "shadow-green-500/30",
               },
               {
                 icon: Zap,
@@ -514,7 +591,7 @@ export default function CanteenManagementLanding() {
                 gradient: "from-blue-400 to-indigo-500",
                 glow: "shadow-blue-500/40",
                 hoverGlow: "hover:shadow-blue-500/60",
-                boxGlow: "shadow-blue-500/30", // Added box glow for mobile
+                boxGlow: "shadow-blue-500/30",
               },
               {
                 icon: Target,
@@ -523,7 +600,7 @@ export default function CanteenManagementLanding() {
                 gradient: "from-purple-400 to-violet-500",
                 glow: "shadow-purple-500/40",
                 hoverGlow: "hover:shadow-purple-500/60",
-                boxGlow: "shadow-purple-500/30", // Added box glow for mobile
+                boxGlow: "shadow-purple-500/30",
               },
               {
                 icon: CheckCircle,
@@ -532,7 +609,7 @@ export default function CanteenManagementLanding() {
                 gradient: "from-orange-400 to-amber-500",
                 glow: "shadow-orange-500/40",
                 hoverGlow: "hover:shadow-orange-500/60",
-                boxGlow: "shadow-orange-500/30", // Added box glow for mobile
+                boxGlow: "shadow-orange-500/30",
               },
               {
                 icon: BarChart3,
@@ -541,7 +618,7 @@ export default function CanteenManagementLanding() {
                 gradient: "from-red-400 to-pink-500",
                 glow: "shadow-red-500/40",
                 hoverGlow: "hover:shadow-red-500/60",
-                boxGlow: "shadow-red-500/30", // Added box glow for mobile
+                boxGlow: "shadow-red-500/30",
               },
               {
                 icon: Users,
@@ -550,15 +627,13 @@ export default function CanteenManagementLanding() {
                 gradient: "from-teal-400 to-cyan-500",
                 glow: "shadow-teal-500/40",
                 hoverGlow: "hover:shadow-teal-500/60",
-                boxGlow: "shadow-teal-500/30", // Added box glow for mobile
+                boxGlow: "shadow-teal-500/30",
               },
             ].map((feature, index) => (
               <Card
                 key={index}
                 className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-white/90 backdrop-blur-sm group ${feature.hoverGlow} ${
-                  activeHovers[`feature-${index}`]
-                    ? `shadow-2xl scale-105 -translate-y-2 ${feature.boxGlow}` // Added box glow for mobile touch
-                    : ""
+                  activeHovers[`feature-${index}`] ? `shadow-2xl scale-105 -translate-y-2 ${feature.boxGlow}` : ""
                 }`}
                 onTouchStart={() => handleTouchStart(`feature-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`feature-${index}`)}
@@ -628,7 +703,7 @@ export default function CanteenManagementLanding() {
                 desc: "Our team provides comprehensive training to get your staff up to speed quickly.",
                 gradient: "from-purple-500 to-violet-600",
                 glow: "shadow-purple-500/50",
-                hoverColor: "text-purple-600", // Fixed hover color for step 3
+                hoverColor: "text-purple-600",
                 hoverScale: "scale-110",
               },
               {
@@ -637,7 +712,7 @@ export default function CanteenManagementLanding() {
                 desc: "Start serving customers with your new smart canteen management system!",
                 gradient: "from-orange-500 to-amber-600",
                 glow: "shadow-orange-500/50",
-                hoverColor: "text-orange-600", // Fixed hover color for step 4
+                hoverColor: "text-orange-600",
                 hoverScale: "scale-110",
               },
             ].map((item, index) => (
@@ -663,9 +738,15 @@ export default function CanteenManagementLanding() {
                   </span>
                 </div>
                 <h4
-                  className={`text-2xl font-bold mb-4 text-gray-900 transition-all duration-500 ${
-                    activeHovers[`how-it-works-${index}`] ? `${item.hoverColor} ${item.hoverScale}` : ""
-                  } group-hover:${item.hoverColor} group-hover:${item.hoverScale}`}
+                  className={`
+                    text-2xl font-bold mb-4 text-gray-900 transition-all duration-500
+                    
+                    ${activeHovers[`how-it-works-${index}`] ? `${item.hoverColor} ${item.hoverScale}` : ""}
+                    ${index === 2 ? "group-hover:text-purple-600" : ""}
+                    ${index === 3 ? "group-hover:text-orange-600" : ""}
+                    ${index === 1 ? "group-hover:text-green-600" : ""}
+                    ${index === 0 ? "group-hover:text-blue-600" : ""}
+                  `}
                 >
                   {item.title}
                 </h4>
