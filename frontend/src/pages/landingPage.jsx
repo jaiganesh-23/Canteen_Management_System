@@ -222,7 +222,7 @@ export default function CanteenManagementLanding() {
 
       {/* Component 1: Hero Section with Carousel */}
       <section id="hero" className="px-6 py-20 max-w-7xl mx-auto relative mt-16 overflow-hidden">
-        <div className="relative h-[80vh] rounded-3xl overflow-hidden shadow-2xl">
+        <div className="relative h-[90vh] lg:h-[80vh] rounded-3xl overflow-hidden shadow-2xl">
           {/* Carousel Images */}
           <div className="relative w-full h-full">
             {heroImages.map((image, index) => (
@@ -246,20 +246,20 @@ export default function CanteenManagementLanding() {
 
           <button
             onClick={prevImage}
-            className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-20"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-20"
             onTouchStart={() => handleTouchStart("carousel-prev")}
             onTouchEnd={() => handleTouchEnd("carousel-prev")}
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-3 lg:h-6 w-3 lg:w-6" />
           </button>
 
           <button
             onClick={nextImage}
-            className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-20"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-20"
             onTouchStart={() => handleTouchStart("carousel-next")}
             onTouchEnd={() => handleTouchEnd("carousel-next")}
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-3 lg:h-6 w-3 lg:w-6" />
           </button>
 
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
@@ -287,16 +287,16 @@ export default function CanteenManagementLanding() {
                 }`}
               >
                 <Utensils
-                  className={`h-10 w-10 text-white animate-pulse ${activeHovers["hero-logo"] ? "animate-spin" : ""}`}
+                  className={`h-5 w-5 lg:h-10 lg:w-10 text-white animate-pulse ${activeHovers["hero-logo"] ? "animate-spin" : ""}`}
                 />
               </div>
-              <h1 className="text-5xl font-bold text-white drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+              <h1 className="text-xl lg:text-5xl font-bold text-white drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
                 Canteen Pro
               </h1>
             </div>
 
             <div className="relative">
-              <h2 className="text-3xl md:text-4xl font-bold text-white max-w-5xl mx-auto leading-tight drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+              <h2 className="text-l md:text-l lg:text-4xl font-bold text-white max-w-5xl mx-auto leading-tight drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
                 Smart Canteen Management System:
                 <span
                   className="relative inline-block mx-2 group"
@@ -376,7 +376,7 @@ export default function CanteenManagementLanding() {
               </h2>
             </div>
 
-            <p className="text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)]">
+            <p className="text-sm lg:text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)]">
               Transform your canteen operations with our intelligent management system. Generate bills instantly,
               predict food quantities with AI, optimize discounts for maximum profit, and streamline your entire
               workflow.
@@ -746,6 +746,7 @@ export default function CanteenManagementLanding() {
                     ${index === 3 ? "group-hover:text-orange-600" : ""}
                     ${index === 1 ? "group-hover:text-green-600" : ""}
                     ${index === 0 ? "group-hover:text-blue-600" : ""}
+                    ${activeHovers["how-it-works-0"] && index ==0 ? "text-blue-600":""}
                   `}
                 >
                   {item.title}
