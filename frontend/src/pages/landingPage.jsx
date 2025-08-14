@@ -236,7 +236,7 @@ export default function CanteenManagementLanding() {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
-                  ...(window.innerWidth < 768 && { backgroundSize: "contain", backgroundColor: "#e0e7ff" })
+                  ...(window.innerWidth < 768 && { backgroundSize: "100% 100%", backgroundColor: "#e0e7ff" })
                 }}
               >
                 {/* Subtle gradient overlay for text readability */}
