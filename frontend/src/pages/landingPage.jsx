@@ -22,8 +22,11 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { useState, useEffect } from "react"
+import useScrollAnimation from "@/hooks/useScrollAnimation"
 
 export default function CanteenManagementLanding() {
+  useScrollAnimation();
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
   const [activeHovers, setActiveHovers] = useState({})
@@ -224,7 +227,7 @@ export default function CanteenManagementLanding() {
       <section id="hero" className="px-6 py-20 max-w-7xl mx-auto relative mt-16 overflow-hidden">
         <div className="relative h-[90vh] lg:h-[80vh] rounded-3xl overflow-hidden shadow-2xl">
           {/* Carousel Images */}
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full scroll-scale">
             {heroImages.map((image, index) => (
               <div
                 key={index}
@@ -245,7 +248,7 @@ export default function CanteenManagementLanding() {
             ))}
           </div>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20 scroll-scale">
             {heroImages.map((_, index) => (
               <button
                 key={index}
@@ -260,7 +263,7 @@ export default function CanteenManagementLanding() {
           {/* Hero Content Overlay */}
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center space-y-10 z-10 px-6">
             <div
-              className="flex justify-center items-center space-x-4 mb-8 group"
+              className="flex justify-center items-center space-x-4 mb-8 group scroll-scale"
               onTouchStart={() => handleTouchStart("hero-logo")}
               onTouchEnd={() => handleTouchEnd("hero-logo")}
             >
@@ -278,7 +281,7 @@ export default function CanteenManagementLanding() {
               </h1>
             </div>
 
-            <div className="relative">
+            <div className="relative scroll-scale">
               <h2 className="text-l md:text-l lg:text-4xl font-bold text-white max-w-5xl mx-auto leading-tight drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
                 Smart Canteen Management System:
                 <span
@@ -359,13 +362,13 @@ export default function CanteenManagementLanding() {
               </h2>
             </div>
 
-            <p className="text-sm lg:text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)]">
+            <p className="text-sm lg:text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] scroll-bottom">
               Transform your canteen operations with our intelligent management system. Generate bills instantly,
               predict food quantities with AI, optimize discounts for maximum profit, and streamline your entire
               workflow.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-bottom">
               <Button
                 size="lg"
                 className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
@@ -416,7 +419,7 @@ export default function CanteenManagementLanding() {
       {/* Component 2: User Stats & Benefits */}
       <section className="px-6 py-20 bg-white/80 backdrop-blur-sm" id="features">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-scale">
             <h3 className="text-4xl font-bold text-gray-900 mb-6">Trusted by Canteens Worldwide</h3>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Join thousands of canteen operators who have transformed their business with measurable results
@@ -446,7 +449,8 @@ export default function CanteenManagementLanding() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="text-center group cursor-pointer"
+                className="text-center group cursor-pointer scroll-bottom data-index scroll-animate"
+                data-index={index}
                 onTouchStart={() => handleTouchStart(`stat-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`stat-${index}`)}
               >
@@ -513,7 +517,8 @@ export default function CanteenManagementLanding() {
                   activeHovers[`benefit-${index}`]
                     ? `shadow-2xl scale-105 -translate-y-2 ${benefit.hoverGlow.replace("hover:", "")}`
                     : ""
-                }`}
+                } scroll-bottom data-index scroll-animate`}
+                data-index={index}
                 onTouchStart={() => handleTouchStart(`benefit-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`benefit-${index}`)}
               >
@@ -549,7 +554,7 @@ export default function CanteenManagementLanding() {
       {/* Component 3: Features */}
       <section className="px-6 py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-scale">
             <h3 className="text-4xl font-bold text-gray-900 mb-6">Powerful Features for Modern Canteens</h3>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Everything you need to run a successful canteen operation, powered by cutting-edge technology
@@ -617,7 +622,8 @@ export default function CanteenManagementLanding() {
                 key={index}
                 className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-white/90 backdrop-blur-sm group ${feature.hoverGlow} ${
                   activeHovers[`feature-${index}`] ? `shadow-2xl scale-105 -translate-y-2 ${feature.boxGlow}` : ""
-                }`}
+                } scroll-bottom data-index scroll-animate`}
+                data-index={index}
                 onTouchStart={() => handleTouchStart(`feature-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`feature-${index}`)}
               >
@@ -655,7 +661,7 @@ export default function CanteenManagementLanding() {
       {/* Component 4: How It Works */}
       <section className="px-6 py-20 bg-white/80 backdrop-blur-sm" id="how-it-works">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-scale">
             <h3 className="text-4xl font-bold text-gray-900 mb-6">How It Works</h3>
             <p className="text-xl text-gray-600">Get started in just 4 simple steps</p>
           </div>
@@ -701,7 +707,8 @@ export default function CanteenManagementLanding() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="text-center group cursor-pointer"
+                className="text-center group cursor-pointer scroll-bottom data-index scroll-animate"
+                data-index={index}
                 onTouchStart={() => handleTouchStart(`how-it-works-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`how-it-works-${index}`)}
               >
@@ -744,7 +751,7 @@ export default function CanteenManagementLanding() {
       {/* Component 5: Additional Characteristics - Why Choose Our System */}
       <section className="px-6 py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-scale">
             <h3 className="text-4xl font-bold text-gray-900 mb-6">Why Choose Our System?</h3>
             <p className="text-xl text-gray-600">Built for reliability, security, and growth</p>
           </div>
@@ -816,7 +823,8 @@ export default function CanteenManagementLanding() {
                 key={index}
                 className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg transition-all duration-700 transform group ${item.hoverGlow} hover:shadow-2xl hover:scale-105 hover:-translate-y-2 ${
                   activeHovers[`why-choose-${index}`] ? `shadow-2xl scale-105 -translate-y-2 ${item.boxGlow}` : ""
-                }`}
+                } scroll-bottom data-index scroll-animate`}
+                data-index={index}
                 onTouchStart={() => handleTouchStart(`why-choose-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`why-choose-${index}`)}
               >
@@ -850,7 +858,7 @@ export default function CanteenManagementLanding() {
       {/* Component 6: Customer Testimonials */}
       <section className="px-6 py-20 bg-white/80 backdrop-blur-sm" id="testimonials">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-scale">
             <h3 className="text-4xl font-bold text-gray-900 mb-6">What Our Customers Say</h3>
             <p className="text-xl text-gray-600">Real stories from canteen operators who transformed their business</p>
           </div>
@@ -883,7 +891,7 @@ export default function CanteenManagementLanding() {
                 key={index}
                 className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br ${testimonial.bgGradient} group ${
                   activeHovers[`testimonial-${index}`] ? "shadow-2xl scale-105 -translate-y-2" : ""
-                }`}
+                } scroll-bottom`}
                 onTouchStart={() => handleTouchStart(`testimonial-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`testimonial-${index}`)}
               >
@@ -921,12 +929,12 @@ export default function CanteenManagementLanding() {
       <section className="px-6 py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-4xl mx-auto text-center">
-          <h3 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Canteen?</h3>
-          <p className="text-xl text-blue-100 mb-10 leading-relaxed">
+          <h3 className="text-4xl font-bold text-white mb-6 scroll-scale">Ready to Transform Your Canteen?</h3>
+          <p className="text-xl text-blue-100 mb-10 leading-relaxed scroll-scale">
             Join thousands of successful canteen operators and start your journey to smarter operations today.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10 scroll-bottom">
             <Button
               size="lg"
               className={`bg-white text-blue-600 hover:bg-gray-100 hover:shadow-2xl hover:shadow-white/50 px-10 py-4 text-lg rounded-xl shadow-lg transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 group ${
@@ -962,7 +970,7 @@ export default function CanteenManagementLanding() {
             </Button>
           </div>
 
-          <div className="text-blue-100 text-lg">
+          <div className="text-blue-100 text-lg scroll-scale">
             <p>No credit card required • 14-day free trial • Cancel anytime</p>
           </div>
         </div>
@@ -972,7 +980,7 @@ export default function CanteenManagementLanding() {
       <footer className="bg-gray-900 text-white px-6 py-12">
         <div className="max-w-7xl mx-auto text-center">
           <div
-            className="flex justify-center items-center space-x-4 mb-6 group"
+            className="flex justify-center items-center space-x-4 mb-6 group scroll-scale"
             onTouchStart={() => handleTouchStart("footer-logo")}
             onTouchEnd={() => handleTouchEnd("footer-logo")}
           >
@@ -995,7 +1003,7 @@ export default function CanteenManagementLanding() {
               Canteen Management System
             </span>
           </div>
-          <p className="text-gray-400 text-lg">© 2024 Canteen Management System. All rights reserved.</p>
+          <p className="text-gray-400 text-lg scroll-bottom scroll-scale">© 2024 Canteen Management System. All rights reserved.</p>
         </div>
       </footer>
     </div>

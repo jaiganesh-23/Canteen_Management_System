@@ -3,6 +3,79 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Scroll Animations */
+
+.scroll-animate{
+  transition-delay: var(--scroll-delay, 0s)!important;
+}
+
+.scroll-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 2s ease;
+  will-change: transform, opacity;
+}
+
+.scroll-scale:active,
+.scroll-scale:focus,
+.scroll-scale:hover {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  transform: translate(0, 0) !important;
+}
+
+.scroll-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scroll-bottom {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 2s ease;
+  will-change: transform, opacity;
+}
+
+.scroll-bottom:active,
+.scroll-bottom:focus,
+.scroll-bottom:hover {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transform: scale(1) !important;
+}
+
+.scroll-bottom.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-top {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: all 2s ease;
+  will-change: transform, opacity;
+}
+
+.scroll-top:active,
+.scroll-top:focus,
+.scroll-top:hover {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.scroll-top.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px){
+  *{
+    opacity: 1 !important;
+    /* transform: scale(1) !important; */
+    /* transform: translate(0, 0) !important;  */
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
