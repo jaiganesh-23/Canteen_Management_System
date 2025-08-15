@@ -47,6 +47,45 @@ export default function CanteenManagementLanding() {
     },
   ]
 
+  const [activeIndexes, setActiveIndexes] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          setActiveIndexes(prev => [...prev, Number(entry.target.ariaRowIndex ?? 0)]);
+          if(entry.target.classList.contains('data-index')) {
+            // Set transition delay based on index
+            const index = Number(entry.target.dataset.index ?? 0);
+            entry.target.style.setProperty('--scroll-delay', `${index * 0.15}s`);
+            setTimeout(() => {
+              entry.target.style.setProperty('--scroll-delay', '0s');
+            }, index * 150); 
+          }
+          observer.unobserve(entry.target);
+        } else {
+          // Remove the active class when element leaves viewport
+          // entry.target.classList.remove('active');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px'
+    });
+
+    // Observe all elements with animation classes
+    document.querySelectorAll('.scroll-scale, .scroll-bottom, .scroll-top').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      document.querySelectorAll('.scroll-scale, .scroll-bottom, .scroll-top').forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, []);
+
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -368,13 +407,13 @@ export default function CanteenManagementLanding() {
               </h2>
             </div>
 
-            <p className="text-sm lg:text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] scroll-bottom">
+            <p className="text-sm lg:text-xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] scroll-bottom" aria-rowindex="0">
               Transform your canteen operations with our intelligent management system. Generate bills instantly,
               predict food quantities with AI, optimize discounts for maximum profit, and streamline your entire
               workflow.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-scale">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-bottom" aria-rowindex="1">
               <Button
                 size="lg"
                 className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
@@ -455,8 +494,9 @@ export default function CanteenManagementLanding() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="text-center group cursor-pointer scroll-bottom data-index scroll-animate"
+                className={`text-center group cursor-pointer scroll-bottom data-index scroll-animate ${activeIndexes.includes(2+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
+                aria-rowindex={2+index}
                 onTouchStart={() => handleTouchStart(`stat-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`stat-${index}`)}
               >
@@ -523,8 +563,10 @@ export default function CanteenManagementLanding() {
                   activeHovers[`benefit-${index}`]
                     ? `shadow-2xl scale-105 -translate-y-2 ${benefit.hoverGlow.replace("hover:", "")}`
                     : ""
-                } scroll-bottom data-index scroll-animate group`}
+                } scroll-bottom data-index scroll-animate
+                  ${activeIndexes.includes(5+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
+                aria-rowindex={5+index}
                 onTouchStart={() => handleTouchStart(`benefit-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`benefit-${index}`)}
               >
@@ -628,8 +670,10 @@ export default function CanteenManagementLanding() {
                 key={index}
                 className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-white/90 backdrop-blur-sm group ${feature.hoverGlow} ${
                   activeHovers[`feature-${index}`] ? `shadow-2xl scale-105 -translate-y-2 ${feature.boxGlow}` : ""
-                } scroll-bottom data-index scroll-animate`}
+                } scroll-bottom data-index scroll-animate
+                  ${activeIndexes.includes(9+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
+                aria-rowindex={9+index}
                 onTouchStart={() => handleTouchStart(`feature-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`feature-${index}`)}
               >
@@ -713,8 +757,10 @@ export default function CanteenManagementLanding() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="text-center group cursor-pointer scroll-bottom data-index scroll-animate"
+                className={`text-center group cursor-pointer scroll-bottom data-index scroll-animate
+                  ${activeIndexes.includes(15+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
+                aria-rowindex={15+index}
                 onTouchStart={() => handleTouchStart(`how-it-works-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`how-it-works-${index}`)}
               >
@@ -829,8 +875,10 @@ export default function CanteenManagementLanding() {
                 key={index}
                 className={`flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg transition-all duration-700 transform group ${item.hoverGlow} hover:shadow-2xl hover:scale-105 hover:-translate-y-2 ${
                   activeHovers[`why-choose-${index}`] ? `shadow-2xl scale-105 -translate-y-2 ${item.boxGlow}` : ""
-                } scroll-bottom data-index scroll-animate`}
+                } scroll-bottom data-index scroll-animate
+                  ${activeIndexes.includes(19+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
+                aria-rowindex={19+index}
                 onTouchStart={() => handleTouchStart(`why-choose-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`why-choose-${index}`)}
               >
@@ -897,7 +945,10 @@ export default function CanteenManagementLanding() {
                 key={index}
                 className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br ${testimonial.bgGradient} group ${
                   activeHovers[`testimonial-${index}`] ? "shadow-2xl scale-105 -translate-y-2" : ""
-                } scroll-bottom`}
+                } scroll-bottom data-index scroll-animate
+                  ${activeIndexes.includes(25+index) ? "active pointer-events-auto" : ""}`}
+                data-index={index}
+                aria-rowindex={25+index}
                 onTouchStart={() => handleTouchStart(`testimonial-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`testimonial-${index}`)}
               >
@@ -940,7 +991,8 @@ export default function CanteenManagementLanding() {
             Join thousands of successful canteen operators and start your journey to smarter operations today.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10 scroll-bottom">
+          <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-10 scroll-bottom
+            ${activeIndexes.includes(29) ? "active pointer-events-auto" : ""}`} aria-rowindex={29}>
             <Button
               size="lg"
               className={`bg-white text-blue-600 hover:bg-gray-100 hover:shadow-2xl hover:shadow-white/50 px-10 py-4 text-lg rounded-xl shadow-lg transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 group ${
