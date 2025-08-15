@@ -374,7 +374,7 @@ export default function CanteenManagementLanding() {
               workflow.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-bottom">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-scale">
               <Button
                 size="lg"
                 className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
