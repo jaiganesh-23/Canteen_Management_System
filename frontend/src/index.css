@@ -31,7 +31,7 @@
 
 .scroll-bottom {
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(20vh);
   transition: all 2s ease;
   will-change: transform, opacity;
 }
@@ -51,7 +51,7 @@
 
 .scroll-top {
   opacity: 0;
-  transform: translateY(-100px);
+  transform: translateY(-20vh);
   transition: all 2s ease;
   will-change: transform, opacity;
 }
@@ -68,11 +68,19 @@
   transform: translateY(0);
 }
 
-@media (max-width: 768px){
-  *{
-    opacity: 1 !important;
-    /* transform: scale(1) !important; */
-    /* transform: translate(0, 0) !important;  */
+@media (max-width: 1024px){
+  .scroll-bottom{
+    opacity: 1!important;
+  }
+  .scroll-bottom {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 2s ease;
+    will-change: transform, opacity;
+  }
+  .scroll-bottom.active {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

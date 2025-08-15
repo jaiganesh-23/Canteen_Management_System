@@ -22,15 +22,15 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { useState, useEffect } from "react"
-import useScrollAnimation from "@/hooks/useScrollAnimation"
 
 export default function CanteenManagementLanding() {
-  useScrollAnimation();
   
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
   const [activeHovers, setActiveHovers] = useState({})
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024)
+
 
   const heroImages = [
     {
@@ -46,6 +46,12 @@ export default function CanteenManagementLanding() {
       alt: "Canteen staff using digital ordering system",
     },
   ]
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -239,7 +245,7 @@ export default function CanteenManagementLanding() {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
-                  ...(window.innerWidth < 768 && { backgroundSize: "100% 100%", backgroundColor: "#e0e7ff" })
+                  ...(windowWidth < 768 && { backgroundSize: "100% 100%", backgroundColor: "#e0e7ff" })
                 }}
               >
                 {/* Subtle gradient overlay for text readability */}
@@ -517,7 +523,7 @@ export default function CanteenManagementLanding() {
                   activeHovers[`benefit-${index}`]
                     ? `shadow-2xl scale-105 -translate-y-2 ${benefit.hoverGlow.replace("hover:", "")}`
                     : ""
-                } scroll-bottom data-index scroll-animate`}
+                } scroll-bottom data-index scroll-animate group`}
                 data-index={index}
                 onTouchStart={() => handleTouchStart(`benefit-${index}`)}
                 onTouchEnd={() => handleTouchEnd(`benefit-${index}`)}
@@ -1003,7 +1009,7 @@ export default function CanteenManagementLanding() {
               Canteen Management System
             </span>
           </div>
-          <p className="text-gray-400 text-lg scroll-bottom scroll-scale">© 2024 Canteen Management System. All rights reserved.</p>
+          <p className="text-gray-400 text-lg scroll-scale">© 2024 Canteen Management System. All rights reserved.</p>
         </div>
       </footer>
     </div>
