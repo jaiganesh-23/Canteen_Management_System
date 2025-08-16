@@ -34,15 +34,15 @@ export default function CanteenManagementLanding() {
 
   const heroImages = [
     {
-      url: "/modern-canteen-kitchen.png",
+      url: "/hero_image1.png",
       alt: "Modern canteen kitchen with chefs preparing fresh food",
     },
     {
-      url: "/busy-canteen.png",
+      url: "/hero_image2.png",
       alt: "Busy canteen dining area with students",
     },
     {
-      url: "/canteen-staff-ordering.png",
+      url: "/hero_image3.png",
       alt: "Canteen staff using digital ordering system",
     },
   ]
