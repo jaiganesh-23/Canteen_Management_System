@@ -27,12 +27,12 @@ const registerCanteenOwnerPage = () => {
                         <Input type="password" id="confirm-password" placeholder="Confirm your password" />
                     </div>
                     <div className="register-canteen-owner-form-input">
-                        <Label htmlFor="staff-id">Canteen Owner Name</Label>
-                        <Input type="text" id="staff-id" placeholder="Enter your Name" />
+                        <Label htmlFor="canteen-owner-name">Canteen Owner Name</Label>
+                        <Input type="text" id="canteen-owner-name" placeholder="Enter your Name" />
                     </div>
                     <div className="register-canteen-owner-form-input">
-                        <Label htmlFor="canteen-id">Canteen Name</Label>
-                        <Input type="text" id="canteen-id" placeholder="Enter your Canteen Name" />
+                        <Label htmlFor="canteen-name">Canteen Name</Label>
+                        <Input type="text" id="canteen-name" placeholder="Enter your Canteen Name" />
                     </div>
                     <div className='register-canteen-owner-button-div'>   
                         <Button type="submit" className='register-canteen-owner-form-button'>Register(Canteen Owner)</Button>
