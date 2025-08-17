@@ -1011,6 +1011,7 @@ export default function CanteenManagementLanding() {
               } cursor-pointer`}
               onTouchStart={() => handleTouchStart("footer-trial")}
               onTouchEnd={() => handleTouchEnd("footer-trial")}
+              onClick={() => navigate("/get-started")}
             >
               <ArrowRight
                 className={`mr-3 h-6 w-6 group-hover:translate-x-2 group-hover:animate-pulse transition-all duration-300 ${
