@@ -58,10 +58,10 @@ export default function CanteenManagementLanding() {
           if(entry.target.classList.contains('data-index')) {
             // Set transition delay based on index
             const index = Number(entry.target.dataset.index ?? 0);
-            entry.target.style.setProperty('--scroll-delay', `${index * 0.15}s`);
+            entry.target.style.setProperty('--scroll-delay', windowWidth>=1024?`${index * 0.3}s`:`${index * 0.15}s`);
             setTimeout(() => {
               entry.target.style.setProperty('--scroll-delay', '0s');
-            }, index * 150); 
+            }, windowWidth>=1024?300:150); 
           }
           observer.unobserve(entry.target);
         } else {
@@ -173,13 +173,13 @@ export default function CanteenManagementLanding() {
                   activeHovers["nav-logo"] ? "text-blue-600" : ""
                 }`}
               >
-                CanteenPro
+                Canteen Pro
               </span>
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
               <a href="#hero" className={getLinkStyles("hero")}>
-                Canteen Management System
+                Canteen Pro
               </a>
               <a href="#features" className={getLinkStyles("features")}>
                 Features
@@ -197,7 +197,7 @@ export default function CanteenManagementLanding() {
                 variant="ghost"
                 className={`text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 ${
                   activeHovers["nav-signin"] ? "text-blue-600 bg-blue-50 scale-105 shadow-lg shadow-blue-500/30" : ""
-                }`}
+                } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("nav-signin")}
                 onTouchEnd={() => handleTouchEnd("nav-signin")}
               >
@@ -206,7 +206,7 @@ export default function CanteenManagementLanding() {
               <Button
                 className={`bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 ${
                   activeHovers["nav-getstarted"] ? "shadow-xl shadow-blue-500/50 scale-105 -translate-y-0.5" : ""
-                }`}
+                } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("nav-getstarted")}
                 onTouchEnd={() => handleTouchEnd("nav-getstarted")}
               >
@@ -229,16 +229,16 @@ export default function CanteenManagementLanding() {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-gray-200/50 animate-in slide-in-from-top duration-300">
               <div className="flex flex-col space-y-4">
-                <a href="#hero" className={`${getLinkStyles("hero")} py-2`}>
-                  Canteen Management System
+                <a href="#hero" className={`${getLinkStyles("hero")} py-2`} onClick={() => setIsMenuOpen(false)}>
+                  Canteen Pro
                 </a>
-                <a href="#features" className={`${getLinkStyles("features")} py-2`}>
+                <a href="#features" className={`${getLinkStyles("features")} py-2`} onClick={() => setIsMenuOpen(false)}>
                   Features
                 </a>
-                <a href="#how-it-works" className={`${getLinkStyles("how-it-works")} py-2`}>
+                <a href="#how-it-works" className={`${getLinkStyles("how-it-works")} py-2`} onClick={() => setIsMenuOpen(false)}>
                   How It Works
                 </a>
-                <a href="#testimonials" className={`${getLinkStyles("testimonials")} py-2`}>
+                <a href="#testimonials" className={`${getLinkStyles("testimonials")} py-2`} onClick={() => setIsMenuOpen(false)}>
                   Testimonials
                 </a>
                 <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200/50">
@@ -246,18 +246,20 @@ export default function CanteenManagementLanding() {
                     variant="ghost"
                     className={`text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-500/30 justify-start ${
                       activeHovers["mobile-signin"] ? "text-blue-600 bg-blue-50 shadow-lg shadow-blue-500/30" : ""
-                    }`}
+                    } cursor-pointer`}
                     onTouchStart={() => handleTouchStart("mobile-signin")}
                     onTouchEnd={() => handleTouchEnd("mobile-signin")}
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Sign In
                   </Button>
                   <Button
                     className={`bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 hover:shadow-xl hover:shadow-blue-500/50 text-white justify-start ${
                       activeHovers["mobile-getstarted"] ? "shadow-xl shadow-blue-500/50" : ""
-                    }`}
+                    } cursor-pointer`}
                     onTouchStart={() => handleTouchStart("mobile-getstarted")}
                     onTouchEnd={() => handleTouchEnd("mobile-getstarted")}
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Get Started
                   </Button>
@@ -415,31 +417,31 @@ export default function CanteenManagementLanding() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-bottom" aria-rowindex="1">
               <Button
-                size="lg"
+                size={windowWidth<=768?"lg":"xl"}
                 className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
                   activeHovers["hero-getstarted"] ? "shadow-3xl shadow-blue-500/30 scale-110 -translate-y-1" : ""
-                }`}
+                } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("hero-getstarted")}
                 onTouchEnd={() => handleTouchEnd("hero-getstarted")}
               >
                 <Play
-                  className={`mr-3 h-6 w-6 group-hover:animate-spin ${
-                    activeHovers["hero-getstarted"] ? "animate-spin" : ""
+                  className={`mr-3 h-6 w-6 group-hover:animate-pulse ${
+                    activeHovers["hero-getstarted"] ? "animate-pulse" : ""
                   }`}
                 />
                 Get Started Free
                 <Sparkles
-                  className={`ml-2 h-5 w-5 group-hover:animate-pulse ${
-                    activeHovers["hero-getstarted"] ? "animate-pulse" : ""
+                  className={`ml-2 h-5 w-5 group-hover:animate-spin ${
+                    activeHovers["hero-getstarted"] ? "animate-spin" : ""
                   }`}
                 />
               </Button>
               <Button
                 variant="outline"
-                size="lg"
+                size={windowWidth<=768?"lg":"xl"}
                 className={`px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 hover:shadow-2xl hover:shadow-white/30 backdrop-blur-sm transition-all duration-500 group bg-transparent shadow-2xl hover:scale-110 hover:-translate-y-1 ${
                   activeHovers["hero-demo"] ? "bg-white/20 shadow-2xl shadow-white/30 scale-110 -translate-y-1" : ""
-                }`}
+                } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("hero-demo")}
                 onTouchEnd={() => handleTouchEnd("hero-demo")}
               >
@@ -474,7 +476,7 @@ export default function CanteenManagementLanding() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
               {
-                number: "2,500+",
+                number: "10+",
                 label: "Active Canteens",
                 gradient: "from-blue-500 to-indigo-600",
                 glow: "shadow-blue-500/50",
@@ -494,7 +496,7 @@ export default function CanteenManagementLanding() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className={`text-center group cursor-pointer scroll-bottom data-index scroll-animate ${activeIndexes.includes(2+index) ? "active pointer-events-auto" : ""}`}
+                className={`text-center group scroll-bottom data-index scroll-animate ${activeIndexes.includes(2+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
                 aria-rowindex={2+index}
                 onTouchStart={() => handleTouchStart(`stat-${index}`)}
@@ -525,7 +527,7 @@ export default function CanteenManagementLanding() {
                 title: "Boost Revenue",
                 desc: "Smart pricing and discount strategies increase your daily profits by up to 25%",
                 gradient: "from-green-400 to-emerald-500",
-                glow: "shadow-green-500/30",
+                glow: "text-green-600",
                 bgGradient: "from-white to-green-50",
                 hoverGlow: "hover:shadow-green-500/40",
               },
@@ -534,7 +536,7 @@ export default function CanteenManagementLanding() {
                 title: "Reduce Waste",
                 desc: "AI-powered demand prediction helps you prepare the right quantities, cutting waste by 40%",
                 gradient: "from-blue-400 to-indigo-500",
-                glow: "shadow-blue-500/30",
+                glow: "text-blue-600",
                 bgGradient: "from-white to-blue-50",
                 hoverGlow: "hover:shadow-blue-500/40",
               },
@@ -543,7 +545,7 @@ export default function CanteenManagementLanding() {
                 title: "Save Time",
                 desc: "Automated billing and inventory management saves 3+ hours daily for your staff",
                 gradient: "from-purple-400 to-violet-500",
-                glow: "shadow-purple-500/30",
+                glow: "text-purple-600",
                 bgGradient: "from-white to-purple-50",
                 hoverGlow: "hover:shadow-purple-500/40",
               },
@@ -552,7 +554,7 @@ export default function CanteenManagementLanding() {
                 title: "Happy Customers",
                 desc: "Faster service and consistent quality lead to 95% customer satisfaction rates",
                 gradient: "from-orange-400 to-amber-500",
-                glow: "shadow-orange-500/30",
+                glow: "text-orange-600",
                 bgGradient: "from-white to-orange-50",
                 hoverGlow: "hover:shadow-orange-500/40",
               },
@@ -572,7 +574,7 @@ export default function CanteenManagementLanding() {
               >
                 <CardHeader>
                   <div
-                    className={`bg-gradient-to-br ${benefit.gradient} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg ${benefit.glow} group-hover:shadow-xl group-hover:${benefit.glow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ${
+                    className={`bg-gradient-to-br ${benefit.gradient} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl group-hover:${benefit.glow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ${
                       activeHovers[`benefit-${index}`] ? `shadow-xl ${benefit.glow} scale-110 rotate-6` : ""
                     }`}
                   >
@@ -583,8 +585,8 @@ export default function CanteenManagementLanding() {
                     />
                   </div>
                   <CardTitle
-                    className={`text-xl group-hover:text-green-600 transition-colors ${
-                      activeHovers[`benefit-${index}`] ? "text-green-600" : ""
+                    className={`text-xl group-hover:${benefit.glow} transition-colors ${
+                      activeHovers[`benefit-${index}`] ? `${benefit.glow}` : ""
                     }`}
                   >
                     {benefit.title}
@@ -616,7 +618,7 @@ export default function CanteenManagementLanding() {
                 title: "Smart Billing System",
                 desc: "Generate bills instantly with barcode scanning, split payments, and digital receipts",
                 gradient: "from-green-400 to-emerald-500",
-                glow: "shadow-green-500/40",
+                glow: "text-green-600",
                 hoverGlow: "hover:shadow-green-500/60",
                 boxGlow: "shadow-green-500/30",
               },
@@ -625,7 +627,7 @@ export default function CanteenManagementLanding() {
                 title: "AI Demand Prediction",
                 desc: "Predict food quantities needed based on historical data, weather, and events",
                 gradient: "from-blue-400 to-indigo-500",
-                glow: "shadow-blue-500/40",
+                glow: "text-blue-600",
                 hoverGlow: "hover:shadow-blue-500/60",
                 boxGlow: "shadow-blue-500/30",
               },
@@ -634,7 +636,7 @@ export default function CanteenManagementLanding() {
                 title: "Dynamic Pricing",
                 desc: "Optimize discounts and pricing strategies to maximize profit and reduce waste",
                 gradient: "from-purple-400 to-violet-500",
-                glow: "shadow-purple-500/40",
+                glow: "text-purple-600",
                 hoverGlow: "hover:shadow-purple-500/60",
                 boxGlow: "shadow-purple-500/30",
               },
@@ -643,7 +645,7 @@ export default function CanteenManagementLanding() {
                 title: "Inventory Management",
                 desc: "Track ingredients, monitor stock levels, and automate reorder notifications",
                 gradient: "from-orange-400 to-amber-500",
-                glow: "shadow-orange-500/40",
+                glow: "text-orange-600",
                 hoverGlow: "hover:shadow-orange-500/60",
                 boxGlow: "shadow-orange-500/30",
               },
@@ -652,7 +654,7 @@ export default function CanteenManagementLanding() {
                 title: "Analytics Dashboard",
                 desc: "Real-time insights on sales, popular items, peak hours, and profit margins",
                 gradient: "from-red-400 to-pink-500",
-                glow: "shadow-red-500/40",
+                glow: "text-red-600",
                 hoverGlow: "hover:shadow-red-500/60",
                 boxGlow: "shadow-red-500/30",
               },
@@ -661,7 +663,7 @@ export default function CanteenManagementLanding() {
                 title: "Staff Management",
                 desc: "Manage shifts, track performance, and streamline communication",
                 gradient: "from-teal-400 to-cyan-500",
-                glow: "shadow-teal-500/40",
+                glow: "text-teal-600",
                 hoverGlow: "hover:shadow-teal-500/60",
                 boxGlow: "shadow-teal-500/30",
               },
@@ -691,8 +693,8 @@ export default function CanteenManagementLanding() {
                       />
                     </div>
                     <span
-                      className={`group-hover:text-gray-800 transition-colors ${
-                        activeHovers[`feature-${index}`] ? "text-gray-800" : ""
+                      className={`group-hover:${feature.glow} transition-colors ${
+                        activeHovers[`feature-${index}`] ? `${feature.glow}` : ""
                       }`}
                     >
                       {feature.title}
@@ -757,7 +759,7 @@ export default function CanteenManagementLanding() {
             ].map((item, index) => (
               <div
                 key={index}
-                className={`text-center group cursor-pointer scroll-bottom data-index scroll-animate
+                className={`text-center group scroll-bottom data-index scroll-animate
                   ${activeIndexes.includes(15+index) ? "active pointer-events-auto" : ""}`}
                 data-index={index}
                 aria-rowindex={15+index}
@@ -788,7 +790,6 @@ export default function CanteenManagementLanding() {
                     ${index === 3 ? "group-hover:text-orange-600" : ""}
                     ${index === 1 ? "group-hover:text-green-600" : ""}
                     ${index === 0 ? "group-hover:text-blue-600" : ""}
-                    ${activeHovers["how-it-works-0"] && index ==0 ? "text-blue-600":""}
                   `}
                 >
                   {item.title}
@@ -896,7 +897,7 @@ export default function CanteenManagementLanding() {
                 <div>
                   <h4
                     className={`text-xl font-bold mb-3 text-gray-900 transition-colors duration-300 group-hover:${item.hoverColor} ${
-                      activeHovers[`why-choose-${index}`] ? item.hoverColor.replace("hover:", "") : ""
+                      activeHovers[`why-choose-${index}`] ? `${item.hoverColor}` : ""
                     }`}
                   >
                     {item.title}
@@ -994,10 +995,10 @@ export default function CanteenManagementLanding() {
           <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-10 scroll-bottom
             ${activeIndexes.includes(29) ? "active pointer-events-auto" : ""}`} aria-rowindex={29}>
             <Button
-              size="lg"
+              size={windowWidth<=768?"lg":"xl"}
               className={`bg-white text-blue-600 hover:bg-gray-100 hover:shadow-2xl hover:shadow-white/50 px-10 py-4 text-lg rounded-xl shadow-lg transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 group ${
                 activeHovers["footer-trial"] ? "bg-gray-100 shadow-2xl shadow-white/50 scale-110 -translate-y-2" : ""
-              }`}
+              } cursor-pointer`}
               onTouchStart={() => handleTouchStart("footer-trial")}
               onTouchEnd={() => handleTouchEnd("footer-trial")}
             >
@@ -1006,7 +1007,7 @@ export default function CanteenManagementLanding() {
                   activeHovers["footer-trial"] ? "translate-x-2 animate-pulse" : ""
                 }`}
               />
-              Start Free Trial
+              Get Started
               <Sparkles
                 className={`ml-2 h-5 w-5 group-hover:animate-spin ${
                   activeHovers["footer-trial"] ? "animate-spin" : ""
@@ -1015,16 +1016,16 @@ export default function CanteenManagementLanding() {
             </Button>
             <Button
               variant="outline"
-              size="lg"
+              size={windowWidth<=768?"lg":"xl"}
               className={`border-2 border-white text-white hover:bg-white hover:text-blue-600 hover:shadow-2xl hover:shadow-white/50 px-10 py-4 text-lg rounded-xl bg-transparent transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 ${
                 activeHovers["footer-demo"]
                   ? "bg-white text-blue-600 shadow-2xl shadow-white/50 scale-110 -translate-y-2"
                   : ""
-              }`}
+              } cursor-pointer`}
               onTouchStart={() => handleTouchStart("footer-demo")}
               onTouchEnd={() => handleTouchEnd("footer-demo")}
             >
-              Book a Demo
+              Watch Demo
             </Button>
           </div>
 
@@ -1058,10 +1059,10 @@ export default function CanteenManagementLanding() {
                 activeHovers["footer-logo"] ? "text-blue-400" : ""
               }`}
             >
-              Canteen Management System
+              Canteen Pro
             </span>
           </div>
-          <p className="text-gray-400 text-lg scroll-scale">© 2024 Canteen Management System. All rights reserved.</p>
+          <p className="text-gray-400 text-lg scroll-scale">© 2025 Canteen Pro. All rights reserved.</p>
         </div>
       </footer>
     </div>
