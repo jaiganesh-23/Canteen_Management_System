@@ -211,6 +211,7 @@ export default function CanteenManagementLanding() {
                 } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("nav-getstarted")}
                 onTouchEnd={() => handleTouchEnd("nav-getstarted")}
+                onClick={() => navigate("/get-started")}
               >
                 Get Started
               </Button>
@@ -264,7 +265,10 @@ export default function CanteenManagementLanding() {
                     } cursor-pointer`}
                     onTouchStart={() => handleTouchStart("mobile-getstarted")}
                     onTouchEnd={() => handleTouchEnd("mobile-getstarted")}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false)
+                      navigate("/get-started")
+                    }}
                   >
                     Get Started
                   </Button>
@@ -428,6 +432,7 @@ export default function CanteenManagementLanding() {
                 } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("hero-getstarted")}
                 onTouchEnd={() => handleTouchEnd("hero-getstarted")}
+                onClick={() => navigate("/get-started")}
               >
                 <Play
                   className={`mr-3 h-6 w-6 group-hover:animate-pulse ${

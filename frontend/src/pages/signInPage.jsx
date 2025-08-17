@@ -2,8 +2,10 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useNavigate } from 'react-router-dom'
 
 const signInPage = () => {
+  const navigate = useNavigate()
 
   return (
     <div className='login-page'>
@@ -31,7 +33,7 @@ const signInPage = () => {
                         </Button>
                     </div>
                 </form>
-                <p className='login-form-text'>Don't have an account? <span className='sign-up-link'>Sign Up</span></p>
+                <p className='login-form-text'>Don't have an account? <span className='sign-up-link' onClick={() => navigate('/get-started')}>Get Started</span></p>
             </div>
             <div className="login-image">
                 <img src="/hero_image3.png" alt="Canteen Pro Software" />

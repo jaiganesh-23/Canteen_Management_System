@@ -220,6 +220,255 @@ html, body, #root {
   }
 }
 
+/* Get Started Page */
+.get-started-page {
+  display: flex;
+  align-items: center;    
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background: RGB(244, 244, 245);
+}
+.get-started-card {
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px solid RGB(228, 228, 231);
+}
+.get-started-info {
+  padding: 5rem;
+  padding-bottom: 2rem;
+  background-color: RGB(255, 255, 255);
+  border-right: 2px solid RGB(228, 228, 231);
+}
+.get-started-header{
+  text-align: center;
+  color: RGB(9, 9, 11);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.get-started-button-div {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+.get-started-button{
+  cursor: pointer;
+  width: 100%;
+}
+.get-started-image {
+  padding: 5rem;
+  padding-bottom: 2rem;
+  background: RGB(244, 244, 245);
+}
+.get-started-image img {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 1400px){
+  .get-started-info {
+    padding: 1rem;
+  }
+  .get-started-image {
+    padding: 1rem;
+  }
+}
+@media (max-width: 768px){
+  .get-started-card {
+    grid-template-columns: 1fr;
+  }
+  .get-started-info {
+    padding: 0;
+    border-right: none;
+    border-bottom: 2px solid RGB(228, 228, 231);
+  }
+  .get-started-image {
+    padding: 0;
+  }
+  .get-started-header {
+    padding-top: 2rem;
+    font-size: 1.1rem;
+  }
+  .get-started-button {
+    font-size: 0.8rem;
+  }
+}
+
+/* Register Staff Page */
+.register-staff-page {
+  display: flex;
+  align-items: center;    
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background: RGB(244, 244, 245);
+}
+.register-staff-card {
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px solid RGB(228, 228, 231);
+}
+.register-staff-form {
+  padding: 5rem;
+  padding-bottom: 2rem;
+  background-color: RGB(255, 255, 255);
+  border-right: 2px solid RGB(228, 228, 231);
+}
+.register-staff-form-header {
+  text-align: center;
+  color: RGB(9, 9, 11);
+  font-size: 2rem;
+  font-weight: 600;
+}
+.register-staff-form-text {
+  text-align: center;
+  color: RGB(113, 113, 139);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+.register-staff-form-input {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.register-staff-form-input label {
+  margin-bottom: 0.5rem;
+}
+.register-staff-button-div {
+  width: 70%;
+  margin: auto;
+}
+.register-staff-form-button {
+  cursor: pointer;
+  width: 100%;
+}
+@media (max-width: 1400px){
+  .register-staff-form {
+    padding: 0.75rem;
+  }
+}
+@media (max-width: 768px){
+  .register-staff-card {
+    grid-template-columns: 1fr;
+  }
+  .register-staff-form {
+    padding: 0;
+    border-right: none;
+    border-bottom: 2px solid RGB(228, 228, 231);
+  }
+  .register-staff-form-header {
+    padding-top: 2rem;
+    font-size: 1.1rem;
+  }
+  .register-staff-form-text {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .register-staff-form-input label {
+    font-size: 0.95rem;
+  }
+  .register-staff-form-input input,
+  .register-staff-form-input select {
+    font-size: 1rem;
+  }
+  .register-staff-form-button {
+    font-size: 0.8rem;
+  }
+}
+
+/* Register Canteen Owner Page */
+.register-canteen-owner-page {
+  display: flex;
+  align-items: center;    
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background: RGB(244, 244, 245);
+}
+.register-canteen-owner-card {
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px solid RGB(228, 228, 231);
+}
+.register-canteen-owner-form {
+  padding: 5rem;
+  padding-bottom: 2rem;
+  background-color: RGB(255, 255, 255);
+  border-right: 2px solid RGB(228, 228, 231);
+}
+.register-canteen-owner-form-header {
+  text-align: center;
+  color: RGB(9, 9, 11);
+  font-size: 2rem;
+  font-weight: 600;
+}
+.register-canteen-owner-form-text {
+  text-align: center;
+  color: RGB(113, 113, 139);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+.register-canteen-owner-form-input {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.register-canteen-owner-form-input label {
+  margin-bottom: 0.5rem;
+}
+.register-canteen-owner-button-div {
+  width: 70%;
+  margin: auto;
+}
+.register-canteen-owner-form-button {
+  cursor: pointer;
+  width: 100%;
+}
+@media (max-width: 1400px){
+  .register-canteen-owner-form {
+    padding: 0.75rem;
+  }
+}
+@media (max-width: 768px){
+  .register-canteen-owner-card {
+    grid-template-columns: 1fr;
+  }
+  .register-canteen-owner-form {
+    padding: 0;
+    border-right: none;
+    border-bottom: 2px solid RGB(228, 228, 231);
+  }
+  .register-canteen-owner-form-header {
+    padding-top: 2rem;
+    font-size: 1.1rem;
+  }
+  .register-canteen-owner-form-text {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .register-canteen-owner-form-input label {
+    font-size: 0.95rem;
+  }
+  .register-canteen-owner-form-input input,
+  .register-canteen-owner-form-input select {
+    font-size: 1rem;
+  }
+  .register-canteen-owner-form-button {
+    font-size: 0.8rem;
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
