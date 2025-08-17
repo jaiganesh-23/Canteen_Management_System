@@ -22,6 +22,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function CanteenManagementLanding() {
   
@@ -31,7 +32,7 @@ export default function CanteenManagementLanding() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024)
 
-
+  const navigate = useNavigate()
   const heroImages = [
     {
       url: "/hero_image1.png",
@@ -200,6 +201,7 @@ export default function CanteenManagementLanding() {
                 } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("nav-signin")}
                 onTouchEnd={() => handleTouchEnd("nav-signin")}
+                onClick={() => navigate("/sign-in")}
               >
                 Sign In
               </Button>
@@ -249,7 +251,10 @@ export default function CanteenManagementLanding() {
                     } cursor-pointer`}
                     onTouchStart={() => handleTouchStart("mobile-signin")}
                     onTouchEnd={() => handleTouchEnd("mobile-signin")}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false)
+                      navigate("/sign-in")
+                    }}
                   >
                     Sign In
                   </Button>
