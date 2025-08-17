@@ -423,7 +423,7 @@ export default function CanteenManagementLanding() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center scroll-bottom" aria-rowindex="1">
               <Button
                 size={windowWidth<=768?"lg":"xl"}
-                className={`bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
+                className={`pointer-events-auto bg-white/95 text-blue-600 hover:bg-white hover:shadow-3xl hover:shadow-blue-500/30 px-10 py-4 text-lg rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group backdrop-blur-sm ${
                   activeHovers["hero-getstarted"] ? "shadow-3xl shadow-blue-500/30 scale-110 -translate-y-1" : ""
                 } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("hero-getstarted")}
@@ -444,7 +444,7 @@ export default function CanteenManagementLanding() {
               <Button
                 variant="outline"
                 size={windowWidth<=768?"lg":"xl"}
-                className={`px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 hover:shadow-2xl hover:shadow-white/30 backdrop-blur-sm transition-all duration-500 group bg-transparent shadow-2xl hover:scale-110 hover:-translate-y-1 ${
+                className={`pointer-events-auto px-10 py-4 text-lg rounded-xl border-2 border-white/80 text-white hover:bg-white/20 hover:shadow-2xl hover:shadow-white/30 backdrop-blur-sm transition-all duration-500 group bg-transparent shadow-2xl hover:scale-110 hover:-translate-y-1 ${
                   activeHovers["hero-demo"] ? "bg-white/20 shadow-2xl shadow-white/30 scale-110 -translate-y-1" : ""
                 } cursor-pointer`}
                 onTouchStart={() => handleTouchStart("hero-demo")}
