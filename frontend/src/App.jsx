@@ -7,11 +7,13 @@ import RegisterCanteenOwnerPage from './pages/registerCanteenOwnerPage'
 import RegisterStaffPage from './pages/registerStaffPage'
 import MainDashboardPage from './pages/mainDashboardPage'
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   
   return (
     <>
+      <Analytics />
       <Toaster position="top-right" reverseOrder={false} />
       <Router>
         <Routes>
