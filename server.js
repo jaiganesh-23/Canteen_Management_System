@@ -1,12 +1,17 @@
 import express from "express";
 import colors from "colors";
+import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/authRoutes.js";
 //configure env
 dotenv.config();
+
+//database config
+connectDB();
 
 //es module fix
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +23,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+//routes
+app.use("/api/v1/auth", authRoutes);
 
 app.use(express.static(path.join(__dirname, "./frontend/dist")));
 
