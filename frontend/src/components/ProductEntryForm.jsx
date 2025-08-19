@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { Select } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const ProductEntryForm = () => {
   const [productName, setProductName] = useState('');
@@ -38,9 +44,11 @@ const ProductEntryForm = () => {
   };
 
   return (
-    <div className="product-entry-form-container" style={{ padding: '20px', maxWidth: '500px', margin: 'auto' }}>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+    <div className="register-staff-form">
+      <p className='register-staff-form-header'>Add New Product</p>
+      <p className='register-staff-form-text'>Fill in the details to add a new product to the canteen.</p>
+      <form onSubmit={handleSubmit}>
+        <div className="register-staff-form-input">
           <Label htmlFor="productName">Product Name</Label>
           <Input
             id="productName"
@@ -50,21 +58,22 @@ const ProductEntryForm = () => {
             onChange={(e) => setProductName(e.target.value)}
           />
         </div>
-        <div>
+        <div className="register-staff-form-input">
           <Label htmlFor="category">Category/Type</Label>
-          <Select
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="Snack">Snack</option>
-            <option value="Beverage">Beverage</option>
-            <option value="Meal">Meal</option>
-            <option value="Dessert">Dessert</option>
-            <option value="Other">Other</option>
+          <Select onValueChange={(value) => setCategory(value)} defaultValue={category}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Snack">Snack</SelectItem>
+              <SelectItem value="Beverage">Beverage</SelectItem>
+              <SelectItem value="Meal">Meal</SelectItem>
+              <SelectItem value="Dessert">Dessert</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
           </Select>
         </div>
-        <div>
+        <div className="register-staff-form-input">
           <Label htmlFor="productCode">Product Code/SKU</Label>
           <Input
             id="productCode"
@@ -74,7 +83,7 @@ const ProductEntryForm = () => {
             onChange={(e) => setProductCode(e.target.value)}
           />
         </div>
-        <div>
+        <div className="register-staff-form-input">
           <Label htmlFor="mrp">MRP (₹)</Label>
           <Input
             id="mrp"
@@ -84,7 +93,7 @@ const ProductEntryForm = () => {
             onChange={(e) => setMrp(e.target.value)}
           />
         </div>
-        <div>
+        <div className="register-staff-form-input">
           <Label htmlFor="discount">Discount (%)</Label>
           <Input
             id="discount"
@@ -94,13 +103,13 @@ const ProductEntryForm = () => {
             onChange={(e) => setDiscount(e.target.value)}
           />
         </div>
-        <div>
+        <div className="register-staff-form-input">
           <Label>Selling Price</Label>
-          <p className="selling-price" style={{ fontSize: '1.2em', fontWeight: 'bold' }}>
-            ₹{sellingPrice}
-          </p>
+          <p>₹{sellingPrice}</p>
         </div>
-        <Button type="submit">Add Product</Button>
+        <div className='register-staff-button-div'>
+          <Button type="submit" className='register-staff-form-button'>Add Product</Button>
+        </div>
       </form>
     </div>
   );
