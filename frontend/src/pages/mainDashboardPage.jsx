@@ -1,10 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react';
+import ProductEntryForm from '../components/ProductEntryForm';
 
-export default class mainDashboardPage extends Component {
-  render() {
-    return (
-      <div>mainDashboardPage</div>
-    )
-  }
-}
+const MainDashboardPage = () => {
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Canteen Management Dashboard</h1>
+      <ProductEntryForm />
+    </div>
+  );
+};
+
+export default MainDashboardPage;
 
