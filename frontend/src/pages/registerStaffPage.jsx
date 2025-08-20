@@ -39,7 +39,16 @@ const registerStaffPage = () => {
         }
     } catch (error) {
         console.error("Registration error:", error);
-        toast.error("Something went wrong. Please try again.");
+        // Handle error response from the server
+        if (error.response && error.response.data && error.response.data.message) {
+            // Use the server's error message (e.g., for 400 Bad Request)
+            toast.error(error.response.data.message);
+        }
+        else {
+            // Fallback for network or unknown errors
+            toast.error("Something went wrong. Please try again.");
+        }
+        return;
     }
   }
 
