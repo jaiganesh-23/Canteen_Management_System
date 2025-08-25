@@ -6,6 +6,7 @@ import GetStartedPage from './pages/getStartedPage'
 import RegisterCanteenOwnerPage from './pages/registerCanteenOwnerPage'
 import RegisterStaffPage from './pages/registerStaffPage'
 import MainDashboardPage from './pages/mainDashboardPage'
+import ProductFormPage from './pages/ProductFormPage'
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register-canteen-owner" element={<RegisterCanteenOwnerPage />} />
           <Route path="/register-staff" element={<RegisterStaffPage />} />
           <Route path="/main-dashboard" element={<MainDashboardPage />} />
+          <Route path="/product-form" element={<ProductFormPage />} />
         </Routes>
       </Router>
     </>
