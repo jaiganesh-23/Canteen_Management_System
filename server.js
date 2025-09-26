@@ -58,7 +58,7 @@ app.use("*", function (req, res) {
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "https://canteen-management-system-lilac.vercel.app/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   console.log('Callback URL:',callbackURL)
   let user = await userModel.findOne({ email: profile.emails[0].value });
