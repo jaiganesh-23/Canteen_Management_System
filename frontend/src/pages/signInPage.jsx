@@ -61,7 +61,7 @@ const signInPage = () => {
                         <Button type="submit" className='login-form-button'>Sign In</Button>
                     </div>
                     <div className="google-button-div">
-                        <Button className='google-button'>
+                        <Button className='google-button' type='button' onClick={() => window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`}>
                             <i class='bxl  bx-google google-icon'  ></i> 
                             Sign in with Google
                         </Button>
