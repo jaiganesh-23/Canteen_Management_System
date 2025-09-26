@@ -40,7 +40,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
     // Redirect to frontend with user info
     let user = await userModel.findOne({ email: req.user.email });
     let role = user ? user.role : null;
-    res.redirect('/complete-profile?email=' + encodeURIComponent(req.user.email) + '&name=' + encodeURIComponent(req.user.name) + '&role=' + encodeURIComponent(role));
+    res.redirect('https://canteen-management-system-lilac.vercel.app/complete-profile?email=' + encodeURIComponent(req.user.email) + '&name=' + encodeURIComponent(req.user.name) + '&role=' + encodeURIComponent(role));
   }
 );
 
