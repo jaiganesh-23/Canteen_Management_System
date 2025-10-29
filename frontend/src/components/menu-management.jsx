@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -43,146 +43,156 @@ import {
   Sun,
   Moon,
 } from "lucide-react"
+import { set } from "date-fns"
 
 // Mock menu data with day-wise organization
-const initialMenuData = {
-  monday: {
-    breakfast: [
-      {
-        id: 1,
-        name: "Idli Sambar",
-        price: 40,
-        tax: 5,
-        category: "South Indian",
-        description: "Steamed rice cakes with lentil curry",
-      },
-      {
-        id: 2,
-        name: "Poha",
-        price: 35,
-        tax: 5,
-        category: "North Indian",
-        description: "Flattened rice with vegetables",
-      },
-    ],
-    lunch: [
-      { id: 3, name: "Dal Rice", price: 80, tax: 5, category: "Combo", description: "Lentil curry with steamed rice" },
-      {
-        id: 4,
-        name: "Chicken Curry",
-        price: 120,
-        tax: 5,
-        category: "Non-Veg",
-        description: "Spicy chicken curry with rice",
-      },
-    ],
-    evening: [
-      {
-        id: 5,
-        name: "Samosa",
-        price: 20,
-        tax: 5,
-        category: "Snacks",
-        description: "Crispy pastry with potato filling",
-      },
-      { id: 6, name: "Tea", price: 15, tax: 5, category: "Beverages", description: "Hot masala tea" },
-    ],
-    dinner: [
-      {
-        id: 7,
-        name: "Chapati Curry",
-        price: 90,
-        tax: 5,
-        category: "Combo",
-        description: "Indian bread with vegetable curry",
-      },
-      {
-        id: 8,
-        name: "Fried Rice",
-        price: 85,
-        tax: 5,
-        category: "Rice",
-        description: "Stir-fried rice with vegetables",
-      },
-    ],
-  },
-  tuesday: {
-    breakfast: [
-      {
-        id: 9,
-        name: "Dosa",
-        price: 50,
-        tax: 5,
-        category: "South Indian",
-        description: "Crispy crepe with coconut chutney",
-      },
-      {
-        id: 10,
-        name: "Upma",
-        price: 30,
-        tax: 5,
-        category: "South Indian",
-        description: "Semolina porridge with vegetables",
-      },
-    ],
-    lunch: [
-      {
-        id: 11,
-        name: "Biryani",
-        price: 150,
-        tax: 5,
-        category: "Rice",
-        description: "Aromatic rice with spices and meat",
-      },
-      {
-        id: 12,
-        name: "Paneer Butter Masala",
-        price: 100,
-        tax: 5,
-        category: "Veg",
-        description: "Cottage cheese in rich tomato gravy",
-      },
-    ],
-    evening: [
-      { id: 13, name: "Pakora", price: 25, tax: 5, category: "Snacks", description: "Deep-fried vegetable fritters" },
-      { id: 14, name: "Coffee", price: 20, tax: 5, category: "Beverages", description: "Hot filter coffee" },
-    ],
-    dinner: [
-      {
-        id: 15,
-        name: "Noodles",
-        price: 80,
-        tax: 5,
-        category: "Chinese",
-        description: "Stir-fried noodles with vegetables",
-      },
-      { id: 16, name: "Soup", price: 40, tax: 5, category: "Starter", description: "Hot vegetable soup" },
-    ],
-  },
-  // Add more days as needed
-}
+// const initialMenuData = {
+//   monday: {
+//     breakfast: [
+//       {
+//         id: 1,
+//         name: "Idli Sambar",
+//         price: 40,
+//         tax: 5,
+//         category: "South Indian",
+//         description: "Steamed rice cakes with lentil curry",
+//       },
+//       {
+//         id: 2,
+//         name: "Poha",
+//         price: 35,
+//         tax: 5,
+//         category: "North Indian",
+//         description: "Flattened rice with vegetables",
+//       },
+//     ],
+//     lunch: [
+//       { id: 3, name: "Dal Rice", price: 80, tax: 5, category: "Combo", description: "Lentil curry with steamed rice" },
+//       {
+//         id: 4,
+//         name: "Chicken Curry",
+//         price: 120,
+//         tax: 5,
+//         category: "Non-Veg",
+//         description: "Spicy chicken curry with rice",
+//       },
+//     ],
+//     evening: [
+//       {
+//         id: 5,
+//         name: "Samosa",
+//         price: 20,
+//         tax: 5,
+//         category: "Snacks",
+//         description: "Crispy pastry with potato filling",
+//       },
+//       { id: 6, name: "Tea", price: 15, tax: 5, category: "Beverages", description: "Hot masala tea" },
+//     ],
+//     dinner: [
+//       {
+//         id: 7,
+//         name: "Chapati Curry",
+//         price: 90,
+//         tax: 5,
+//         category: "Combo",
+//         description: "Indian bread with vegetable curry",
+//       },
+//       {
+//         id: 8,
+//         name: "Fried Rice",
+//         price: 85,
+//         tax: 5,
+//         category: "Rice",
+//         description: "Stir-fried rice with vegetables",
+//       },
+//     ],
+//   },
+//   tuesday: {
+//     breakfast: [
+//       {
+//         id: 9,
+//         name: "Dosa",
+//         price: 50,
+//         tax: 5,
+//         category: "South Indian",
+//         description: "Crispy crepe with coconut chutney",
+//       },
+//       {
+//         id: 10,
+//         name: "Upma",
+//         price: 30,
+//         tax: 5,
+//         category: "South Indian",
+//         description: "Semolina porridge with vegetables",
+//       },
+//     ],
+//     lunch: [
+//       {
+//         id: 11,
+//         name: "Biryani",
+//         price: 150,
+//         tax: 5,
+//         category: "Rice",
+//         description: "Aromatic rice with spices and meat",
+//       },
+//       {
+//         id: 12,
+//         name: "Paneer Butter Masala",
+//         price: 100,
+//         tax: 5,
+//         category: "Veg",
+//         description: "Cottage cheese in rich tomato gravy",
+//       },
+//     ],
+//     evening: [
+//       { id: 13, name: "Pakora", price: 25, tax: 5, category: "Snacks", description: "Deep-fried vegetable fritters" },
+//       { id: 14, name: "Coffee", price: 20, tax: 5, category: "Beverages", description: "Hot filter coffee" },
+//     ],
+//     dinner: [
+//       {
+//         id: 15,
+//         name: "Noodles",
+//         price: 80,
+//         tax: 5,
+//         category: "Chinese",
+//         description: "Stir-fried noodles with vegetables",
+//       },
+//       { id: 16, name: "Soup", price: 40, tax: 5, category: "Starter", description: "Hot vegetable soup" },
+//     ],
+//   },
+//   // Add more days as needed
+// }
 
 const daysOfWeek = [
-  { value: "monday", label: "Monday" },
-  { value: "tuesday", label: "Tuesday" },
-  { value: "wednesday", label: "Wednesday" },
-  { value: "thursday", label: "Thursday" },
-  { value: "friday", label: "Friday" },
-  { value: "saturday", label: "Saturday" },
-  { value: "sunday", label: "Sunday" },
+  { value: "Monday", label: "Monday" },
+  { value: "Tuesday", label: "Tuesday" },
+  { value: "Wednesday", label: "Wednesday" },
+  { value: "Thursday", label: "Thursday" },
+  { value: "Friday", label: "Friday" },
+  { value: "Saturday", label: "Saturday" },
+  { value: "Sunday", label: "Sunday" },
 ]
 
 const periods = [
-  { value: "breakfast", label: "Breakfast", icon: Coffee },
-  { value: "lunch", label: "Lunch", icon: Utensils },
-  { value: "evening", label: "Evening Snacks", icon: Sun },
-  { value: "dinner", label: "Dinner", icon: Moon },
+  { value: "Breakfast", label: "Breakfast", icon: Coffee },
+  { value: "Lunch", label: "Lunch", icon: Utensils },
+  { value: "Evening Snacks", label: "Evening Snacks", icon: Sun },
+  { value: "Dinner", label: "Dinner", icon: Moon },
 ]
 
+
+
 export default function MenuManagement() {
-  const [menuData, setMenuData] = useState(initialMenuData)
-  const [selectedDay, setSelectedDay] = useState("monday")
-  const [selectedPeriod, setSelectedPeriod] = useState("breakfast")
+  const [menuData, setMenuData] = useState({Monday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},
+  Tuesday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},
+  Wednesday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},
+  Thursday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},
+  Friday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},
+  Saturday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},
+  Sunday: {Breakfast: [], Lunch: [], "Evening Snacks": [], Dinner: []},}
+  );
+  const [selectedDay, setSelectedDay] = useState("Monday")
+  const [selectedPeriod, setSelectedPeriod] = useState("Breakfast")
   const [searchTerm, setSearchTerm] = useState("")
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
@@ -193,6 +203,9 @@ export default function MenuManagement() {
     category: "",
     description: "",
   })
+  const [canteens, setCanteens] = useState([])
+  const [isAddCanteenDialogOpen, setIsAddCanteenDialogOpen] = useState(false)
+  const [newCanteenName, setNewCanteenName] = useState("")
 
   const currentItems = menuData[selectedDay]?.[selectedPeriod] || []
   const filteredItems = currentItems.filter(
@@ -201,28 +214,59 @@ export default function MenuManagement() {
       item.category.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
-  const handleAddItem = () => {
+  const handleAddCanteen = async () => {
+    if (!newCanteenName.trim()) return
+    // Replace with your API endpoint for adding canteens
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/canteen/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: newCanteenName, owners: [localStorage.getItem("email")] }),
+    })
+    const data = await response.json()
+    if (data.success) {
+      setCanteens((prev) => [...prev, data.canteen])
+      setNewCanteenName("")
+      setIsAddCanteenDialogOpen(false)
+    }
+    // Optionally show a toast or error
+  }
+
+  const handleAddItem = async () => {
     if (!newItem.name || !newItem.price || !newItem.category) return
 
-    const item = {
-      id: Date.now(),
-      name: newItem.name,
-      price: Number.parseFloat(newItem.price),
-      tax: Number.parseFloat(newItem.tax),
-      category: newItem.category,
-      description: newItem.description,
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/canteen/menu/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ day: selectedDay, mealType: selectedPeriod,
+        itemName: newItem.name,
+        price: Number.parseFloat(newItem.price),
+        tax: Number.parseFloat(newItem.tax),
+        category: newItem.category,
+        description: newItem.description,
+        canteenId: canteens[0]?._id
+      }),
+    })
+    const data = await response.json()
+    console.log(data)
+    const addedItem = {
+      name: data.menuItem.itemName,
+      price: data.menuItem.price,
+      tax: data.menuItem.tax,
+      category: data.menuItem.category,
+      description: data.menuItem.description,
     }
-
     setMenuData((prev) => ({
       ...prev,
       [selectedDay]: {
         ...prev[selectedDay],
-        [selectedPeriod]: [...(prev[selectedDay]?.[selectedPeriod] || []), item],
+        [selectedPeriod]: [...(prev[selectedDay]?.[selectedPeriod] || []), addedItem],
       },
     }))
-
     setNewItem({ name: "", price: "", tax: "5", category: "", description: "" })
     setIsAddDialogOpen(false)
+
   }
 
   const handleEditItem = (item) => {
@@ -279,8 +323,93 @@ export default function MenuManagement() {
     setEditingItem(null)
   }
 
+  useEffect(() => {
+    async function fetchCanteens() {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/canteens`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email: localStorage.getItem("email")}),
+    })
+    const data = await response.json()
+    if(data.canteens)
+      setCanteens(data.canteens)
+    else{
+      setIsAddCanteenDialogOpen(true)
+    }
+  }
+  fetchCanteens()
+  async function fetchMenuData() {
+  const daysandPeriods = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map(day => ({ day,
+    periods: ["Breakfast", "Lunch", "Evening Snacks", "Dinner"].map(period => ({
+      period,
+    }))
+  }))
+  let initialMenuData = {};
+  for (const {day, periods} of daysandPeriods) {
+    if (!initialMenuData[day]) initialMenuData[day] = {}; 
+    for (const {period} of periods) {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/canteen/menu`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ day, mealType: period, canteenId: canteens[0]?._id}),  
+      })    
+      const data = await response.json()
+      initialMenuData[day][period] = data.menuItems.map(item => ({
+        name: item.itemName,
+        price: item.price,
+        tax: item.tax,
+        category: item.category,
+        description: item.description,
+      }))
+    }
+  }
+  console.log(initialMenuData)
+  setMenuData(initialMenuData)
+  }
+  fetchMenuData()
+  
+  }, [])
+
   return (
     <div className="space-y-6">
+      {/* Add Canteen Popup Button */}
+      <div className="flex justify-end">
+        <Dialog open={isAddCanteenDialogOpen} onOpenChange={setIsAddCanteenDialogOpen}>
+          <DialogTrigger asChild>
+            <Button variant="outline">Add Canteen</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md bg-card border-border">
+            <DialogHeader>
+              <DialogTitle>Add New Canteen</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <Label htmlFor="canteenName">Canteen Name</Label>
+              <Input
+                id="canteenName"
+                value={newCanteenName}
+                onChange={(e) => setNewCanteenName(e.target.value)}
+                placeholder="Enter canteen name"
+              />
+            </div>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsAddCanteenDialogOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button type="button" onClick={handleAddCanteen}>
+                Add
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

@@ -22,6 +22,7 @@ const signInPage = () => {
         if (response.data.success) {
             toast.success("Login successful as " + response.data.user.name);
             // Redirect to dashboard or home page
+            localStorage.setItem("userEmail", response.data.user.email);
             navigate('/main-dashboard');
         } else {
             console.log("Login failed:", response.data.message);

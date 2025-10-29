@@ -109,3 +109,24 @@ export const loginUser = async (req, res) => {
     });
   }
 }
+
+export const getCanteens = async (req, res) => {
+  try {
+    const userEmail = req.body.email;
+    const user = await userModel.findOne({ email: userEmail }).populate('canteens');
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    res.status(200).send({
+      success: true,
+      canteens: user.canteens,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error fetching canteens",
+      error,
+    });
+  }
+}

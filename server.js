@@ -11,6 +11,7 @@ import session from "express-session";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import userModel from "./models/userModel.js";
 import authRoutes from "./routes/authRoutes.js";
+import canteenRoutes from "./routes/canteenRoutes.js";
 
 //configure env
 dotenv.config();
@@ -46,6 +47,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
 
 //routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/canteen", canteenRoutes);
 
 app.use(express.static(path.join(__dirname, "./frontend/dist")));
 

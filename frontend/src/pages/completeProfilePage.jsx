@@ -19,6 +19,7 @@ const CompleteProfilePage = () => {
     
     useEffect(() => {
         if(role === "canteenOwner" || role === "staff") {
+            localStorage.setItem("userEmail", email);
             navigate('/main-dashboard');
         }
     }, []);
@@ -37,7 +38,6 @@ const CompleteProfilePage = () => {
       return;
     }
     navigate('/main-dashboard');
-    return;
     try {
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/auth/register`, {
             email,
@@ -48,6 +48,7 @@ const CompleteProfilePage = () => {
         });
         if (response.data.success) {
             toast.success("Staff registered successfully as " + response.data.user.name);
+            localStorage.setItem("userEmail", response.data.user.email);
             // Redirect to login page or dashboard
             navigate('/sign-in');
         } else {
