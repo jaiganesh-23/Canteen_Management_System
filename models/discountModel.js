@@ -88,4 +88,7 @@ discountSchema.pre("save", function (next) {
   next();
 });
 
+// Compound index for discount validation query (code + canteen + isActive)
+discountSchema.index({ code: 1, canteen: 1, isActive: 1 });
+
 export default mongoose.model("Discount", discountSchema);

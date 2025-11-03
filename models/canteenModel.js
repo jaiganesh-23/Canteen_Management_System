@@ -22,4 +22,8 @@ const canteenSchema = new mongoose.Schema(
         }],
     }
 );
+
+// Index for name field (improves findOne performance)
+canteenSchema.index({ name: 1 });
+
 export default mongoose.model("Canteen", canteenSchema);

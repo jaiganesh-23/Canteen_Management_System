@@ -35,5 +35,9 @@ const userSchema = new mongoose.Schema(
     {
         timestamps: true
     }
-)
+);
+
+// Explicit index for email field (improves findOne performance)
+userSchema.index({ email: 1 });
+
 export default mongoose.model("Users", userSchema);

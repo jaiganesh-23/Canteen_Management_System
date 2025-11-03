@@ -21,9 +21,6 @@ import supplierRoutes from "./routes/supplierRoutes.js";
 //configure env
 dotenv.config();
 
-//database config
-connectDB();
-
 //es module fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +31,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+// Database connection middleware for serverless
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection error:".bgRed.white, error);
+    res.status(503).json({
+      success: false,
+      message: "Database connection failed. Please try again later."
+    });
+  }
+});
+
 // Session middleware
 app.use(session({ secret: process.env.PASSPORT_SECRET, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -93,10 +105,25 @@ passport.deserializeUser(async (id, done) => {
 //PORT
 const PORT = process.env.PORT || 5173;
 
-//run listen
-app.listen(PORT, () => {
-  console.log(
-    `Server Running on prod mode on port ${PORT}`.bgCyan
-      .white
-  );
-});
+//Initialize server with database connection
+const startServer = async () => {
+  try {
+    // Connect to database first
+    await connectDB();
+    console.log("Database connected successfully".bgGreen.white);
+
+    // Then start the server
+    app.listen(PORT, () => {
+      console.log(
+        `Server Running on prod mode on port ${PORT}`.bgCyan
+          .white
+      );
+    });
+  } catch (error) {
+    console.error("Failed to start server:".bgRed.white, error);
+    process.exit(1);
+  }
+};
+
+// Start the server
+startServer();
