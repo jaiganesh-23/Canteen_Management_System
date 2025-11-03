@@ -26,7 +26,14 @@ const userSchema = new mongoose.Schema(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Canteen",
             }
-        ]
+        ],
+        metadata: {
+            type: Object,
+            default: {}
+        }
+    },
+    {
+        timestamps: true
     }
 )
 export default mongoose.model("Users", userSchema);

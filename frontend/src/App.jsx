@@ -5,7 +5,7 @@ import SignInPage from './pages/signInPage'
 import GetStartedPage from './pages/getStartedPage'
 import RegisterCanteenOwnerPage from './pages/registerCanteenOwnerPage'
 import RegisterStaffPage from './pages/registerStaffPage'
-import MainDashboardPage from './pages/mainDashboardPage'
+import ProfileDashboardPage from './pages/profileDashboardPage'
 import CompleteProfilePage from './pages/completeProfilePage';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
@@ -23,7 +23,7 @@ function App() {
           <Route path="/get-started" element={<GetStartedPage />} />
           <Route path="/register-canteen-owner" element={<RegisterCanteenOwnerPage />} />
           <Route path="/register-staff" element={<RegisterStaffPage />} />
-          <Route path="/main-dashboard" element={<MainDashboardPage />} />
+          <Route path="/profile-dashboard" element={<ProfileDashboardPage />} />
           {/* Use path="/complete-profile" for query params, access them via useLocation or useSearchParams in CompleteProfilePage */}
           <Route path="/complete-profile" element={<CompleteProfilePage />} />
         </Routes>

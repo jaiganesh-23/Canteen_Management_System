@@ -21,8 +21,10 @@ const signInPage = () => {
         });
         if (response.data.success) {
             toast.success("Login successful as " + response.data.user.name);
-            // Redirect to dashboard or home page
-            navigate('/main-dashboard');
+            // Store user data in localStorage
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            // Redirect to profile dashboard
+            navigate('/profile-dashboard');
         } else {
             console.log("Login failed:", response.data.message);
             toast.error(response.data.message);

@@ -19,7 +19,7 @@ const CompleteProfilePage = () => {
     
     useEffect(() => {
         if(role === "canteenOwner" || role === "staff") {
-            navigate('/main-dashboard');
+            navigate('/profile-dashboard');
         }
     }, []);
     
@@ -36,8 +36,6 @@ const CompleteProfilePage = () => {
       console.log("Passwords do not match");
       return;
     }
-    navigate('/main-dashboard');
-    return;
     try {
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/auth/register`, {
             email,
