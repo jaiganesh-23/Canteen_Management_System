@@ -19,6 +19,7 @@ const CompleteProfilePage = () => {
     
     useEffect(() => {
         if(role === "canteenOwner" || role === "staff") {
+            localStorage.setItem('user', JSON.stringify({ email, name, role }));
             navigate('/profile-dashboard');
         }
     }, []);
