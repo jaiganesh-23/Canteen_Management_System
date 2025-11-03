@@ -66,7 +66,7 @@ passport.use(new GoogleStrategy({
       name: profile.displayName,
       email: profile.emails[0].value,
       password: "", // You can prompt for password later
-      role: "staff"
+      role: "" // Role can be set later
     });
   }
   return done(null, user);
