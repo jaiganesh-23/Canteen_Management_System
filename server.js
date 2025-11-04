@@ -58,7 +58,7 @@ app.get("/auth/google/callback", passport.authenticate("google", { failureRedire
     // Redirect to frontend with user info
     let user = await userModel.findOne({ email: req.user.email });
     let role = user ? user.role : null;
-    res.redirect('https://canteen-management-system-lilac.vercel.app/complete-profile?email=' + encodeURIComponent(req.user.email) + '&name=' + encodeURIComponent(req.user.name) + '&role=' + encodeURIComponent(role));
+    res.redirect('https://canteen-management-system-nine.vercel.app//complete-profile?email=' + encodeURIComponent(req.user.email) + '&name=' + encodeURIComponent(req.user.name) + '&role=' + encodeURIComponent(role));
   }
 );
 
@@ -82,7 +82,7 @@ app.use("*", function (req, res) {
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://canteen-management-system-lilac.vercel.app/auth/google/callback"
+  callbackURL: "https://canteen-management-system-nine.vercel.app/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.findOne({ email: profile.emails[0].value });
   if (!user) {
